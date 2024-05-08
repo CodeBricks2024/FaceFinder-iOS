@@ -14,6 +14,7 @@ protocol TargetScene {
 enum Scene {
     case splash(SplashViewModel)
     case main(MainViewModel)
+    case camera(CameraViewModel)
 }
 
 
@@ -30,6 +31,11 @@ extension Scene: TargetScene {
                 vc.bind(to: viewModel)
 //                return .push(vc)
                 return .root(vc)
+            
+            case let .camera(viewModel):
+                var vc = CameraViewController()
+                vc.bind(to: viewModel)
+                return .push(vc)
         }
     }
 }

@@ -17,6 +17,10 @@
 		38915BCD2BE37AC900CD1BF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38915BCC2BE37AC900CD1BF5 /* ViewController.swift */; };
 		38915BD22BE37ADC00CD1BF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38915BD12BE37ADC00CD1BF5 /* Assets.xcassets */; };
 		38915BD52BE37ADC00CD1BF5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 38915BD42BE37ADC00CD1BF5 /* Base */; };
+		38A802D12BEBAE480068ABA0 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D02BEBAE480068ABA0 /* PreviewView.swift */; };
+		38A802D42BEBB3F90068ABA0 /* CustomHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */; };
+		38A802D62BEBB56B0068ABA0 /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */; };
+		38A802D82BEBB5B20068ABA0 /* Extensions+AppString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D72BEBB5B20068ABA0 /* Extensions+AppString.swift */; };
 		38E8858E2BE385E400D1074B /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8858D2BE385E400D1074B /* SceneCoordinatorType.swift */; };
 		38E885902BE3860400D1074B /* TargetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8858F2BE3860400D1074B /* TargetScene.swift */; };
 		38E885922BE3861500D1074B /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E885912BE3861500D1074B /* SceneTransitionType.swift */; };
@@ -53,6 +57,10 @@
 		38915BD12BE37ADC00CD1BF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38915BD42BE37ADC00CD1BF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38915BD62BE37ADC00CD1BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38A802D02BEBAE480068ABA0 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHandlers.swift; sourceTree = "<group>"; };
+		38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
+		38A802D72BEBB5B20068ABA0 /* Extensions+AppString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+AppString.swift"; sourceTree = "<group>"; };
 		38E8858D2BE385E400D1074B /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		38E8858F2BE3860400D1074B /* TargetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetScene.swift; sourceTree = "<group>"; };
 		38E885912BE3861500D1074B /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
@@ -167,6 +175,8 @@
 		38915BC72BE37AC900CD1BF5 /* FaceFinder */ = {
 			isa = PBXGroup;
 			children = (
+				38E885A72BE38F6E00D1074B /* Helpers */,
+				38A802CE2BEBAE3D0068ABA0 /* Views */,
 				385150C02BEBA7A500696F3A /* Style */,
 				38E885AA2BE38FF600D1074B /* Extensions */,
 				38E885982BE38D9900D1074B /* Scenes */,
@@ -180,6 +190,30 @@
 				38915BD62BE37ADC00CD1BF5 /* Info.plist */,
 			);
 			path = FaceFinder;
+			sourceTree = "<group>";
+		};
+		38A802CE2BEBAE3D0068ABA0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				38A802CF2BEBAE420068ABA0 /* Common */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		38A802CF2BEBAE420068ABA0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				38A802D02BEBAE480068ABA0 /* PreviewView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		38A802D22BEBB3F40068ABA0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		38E8858B2BE385B300D1074B /* Coordinator */ = {
@@ -216,7 +250,6 @@
 			children = (
 				385150B32BEBA69300696F3A /* Main */,
 				385150B22BEBA68B00696F3A /* Camera */,
-				38E885A72BE38F6E00D1074B /* Helpers */,
 				38E8859D2BE38E3600D1074B /* Common */,
 				38E885992BE38DA300D1074B /* Splash */,
 			);
@@ -276,6 +309,7 @@
 		38E885A72BE38F6E00D1074B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				38A802D22BEBB3F40068ABA0 /* Protocols */,
 				38E885BC2BE3917F00D1074B /* Scan */,
 				38E885B32BE390EC00D1074B /* Enums */,
 				38E885A82BE38F7400D1074B /* ViewModelBindableType.swift */,
@@ -291,6 +325,8 @@
 				38E885AF2BE3904600D1074B /* Extensions+CGFloat.swift */,
 				38E885B12BE3909C00D1074B /* Extensions+UIScrollView.swift */,
 				38E885B62BE3912200D1074B /* Extensions+Dictionary.swift */,
+				38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */,
+				38A802D72BEBB5B20068ABA0 /* Extensions+AppString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -446,18 +482,22 @@
 				385150BF2BEBA76000696F3A /* MainViewController.swift in Sources */,
 				38E885BB2BE3915B00D1074B /* UIButton + Rx.swift in Sources */,
 				38E885AC2BE3900000D1074B /* Extensions+UIColor.swift in Sources */,
+				38A802D42BEBB3F90068ABA0 /* CustomHandlers.swift in Sources */,
 				38E885B92BE3913C00D1074B /* AVCaptureMetadataOutput+Rx.swift in Sources */,
 				38E885A32BE38E9000D1074B /* BaseViewModel.swift in Sources */,
 				385150B92BEBA73200696F3A /* CameraViewModel.swift in Sources */,
 				38E8858E2BE385E400D1074B /* SceneCoordinatorType.swift in Sources */,
 				38E885AE2BE3902600D1074B /* Extensions+UIFont.swift in Sources */,
+				38A802D12BEBAE480068ABA0 /* PreviewView.swift in Sources */,
 				38E885A92BE38F7400D1074B /* ViewModelBindableType.swift in Sources */,
+				38A802D62BEBB56B0068ABA0 /* Extensions+UIViewController.swift in Sources */,
 				38E885A62BE38F5A00D1074B /* SplashViewController.swift in Sources */,
 				38E885902BE3860400D1074B /* TargetScene.swift in Sources */,
 				38E8859C2BE38DBF00D1074B /* SplashViewModel.swift in Sources */,
 				38915BC92BE37AC900CD1BF5 /* AppDelegate.swift in Sources */,
 				38E885A02BE38E4900D1074B /* BaseViewController.swift in Sources */,
 				38E885972BE3878000D1074B /* Extensions+ObservableType.swift in Sources */,
+				38A802D82BEBB5B20068ABA0 /* Extensions+AppString.swift in Sources */,
 				38915BCB2BE37AC900CD1BF5 /* SceneDelegate.swift in Sources */,
 				385150BD2BEBA75800696F3A /* CameraViewController.swift in Sources */,
 				38E885B52BE390F600D1074B /* UITypes.swift in Sources */,
@@ -613,10 +653,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JH6HFBQXT6;
+				DEVELOPMENT_TEAM = 42U234FGMT;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceFinder/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera permissions";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Album permissions";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -626,7 +668,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.codebricks.FaceFinder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codebricks1.FaceFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -642,10 +684,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JH6HFBQXT6;
+				DEVELOPMENT_TEAM = 42U234FGMT;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceFinder/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera permissions";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Album permissions";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -655,7 +699,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.codebricks.FaceFinder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codebricks1.FaceFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

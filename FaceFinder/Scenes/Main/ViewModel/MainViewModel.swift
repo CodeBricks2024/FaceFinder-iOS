@@ -8,10 +8,11 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Action
 
 
 protocol MainViewModelInput: BaseViewModelInput {
-    
+    var scanAction: CocoaAction { get }
 }
 
 protocol MainViewModelOutput: BaseViewModelOutput {
@@ -28,6 +29,12 @@ class MainViewModel: MainViewModelInput, MainViewModelOutput, MainViewModelType 
     var output: MainViewModelOutput { return self }
     
     // MARK: - Input -
+    lazy var scanAction: CocoaAction = {
+        CocoaAction { [unowned self] _ in
+            let vm = CameraViewModel()
+            return self.sceneCoordinator.transition(to: Scene.camera(vm))
+        }
+    }()
  
     // MARK: - Output -
     

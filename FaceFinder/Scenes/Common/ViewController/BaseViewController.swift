@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
+class BaseViewController: UIViewController {
     
     
     override func viewDidLoad() {
