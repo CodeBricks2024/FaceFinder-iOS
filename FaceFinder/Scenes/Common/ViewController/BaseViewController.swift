@@ -30,5 +30,6 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Set Up UI -
     
     func setupUI() {
+        view.backgroundColor = .white
     }
 }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		385150B72BEBA6B000696F3A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385150B62BEBA6B000696F3A /* MainViewModel.swift */; };
+		385150B92BEBA73200696F3A /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385150B82BEBA73200696F3A /* CameraViewModel.swift */; };
+		385150BD2BEBA75800696F3A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385150BC2BEBA75800696F3A /* CameraViewController.swift */; };
+		385150BF2BEBA76000696F3A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385150BE2BEBA76000696F3A /* MainViewController.swift */; };
+		385150C22BEBA7B000696F3A /* UIButton+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385150C12BEBA7B000696F3A /* UIButton+Style.swift */; };
 		38915BC92BE37AC900CD1BF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38915BC82BE37AC900CD1BF5 /* AppDelegate.swift */; };
 		38915BCB2BE37AC900CD1BF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38915BCA2BE37AC900CD1BF5 /* SceneDelegate.swift */; };
 		38915BCD2BE37AC900CD1BF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38915BCC2BE37AC900CD1BF5 /* ViewController.swift */; };
@@ -36,6 +41,11 @@
 
 /* Begin PBXFileReference section */
 		310A734FB817AC0AD7711197 /* Pods-FaceFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceFinder.debug.xcconfig"; path = "Target Support Files/Pods-FaceFinder/Pods-FaceFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		385150B62BEBA6B000696F3A /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		385150B82BEBA73200696F3A /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		385150BC2BEBA75800696F3A /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		385150BE2BEBA76000696F3A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		385150C12BEBA7B000696F3A /* UIButton+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Style.swift"; sourceTree = "<group>"; };
 		38915BC52BE37AC900CD1BF5 /* FaceFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38915BC82BE37AC900CD1BF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38915BCA2BE37AC900CD1BF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +88,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		385150B22BEBA68B00696F3A /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				385150BB2BEBA75100696F3A /* ViewController */,
+				385150B52BEBA6A800696F3A /* ViewModel */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		385150B32BEBA69300696F3A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				385150BA2BEBA74A00696F3A /* ViewController */,
+				385150B42BEBA69700696F3A /* ViewModel */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		385150B42BEBA69700696F3A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				385150B62BEBA6B000696F3A /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		385150B52BEBA6A800696F3A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				385150B82BEBA73200696F3A /* CameraViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		385150BA2BEBA74A00696F3A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				385150BE2BEBA76000696F3A /* MainViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		385150BB2BEBA75100696F3A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				385150BC2BEBA75800696F3A /* CameraViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		385150C02BEBA7A500696F3A /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				385150C12BEBA7B000696F3A /* UIButton+Style.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
 		38915BBC2BE37AC900CD1BF5 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +167,7 @@
 		38915BC72BE37AC900CD1BF5 /* FaceFinder */ = {
 			isa = PBXGroup;
 			children = (
+				385150C02BEBA7A500696F3A /* Style */,
 				38E885AA2BE38FF600D1074B /* Extensions */,
 				38E885982BE38D9900D1074B /* Scenes */,
 				38E885952BE3876F00D1074B /* Extensions+Rx */,
@@ -145,6 +214,8 @@
 		38E885982BE38D9900D1074B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				385150B32BEBA69300696F3A /* Main */,
+				385150B22BEBA68B00696F3A /* Camera */,
 				38E885A72BE38F6E00D1074B /* Helpers */,
 				38E8859D2BE38E3600D1074B /* Common */,
 				38E885992BE38DA300D1074B /* Splash */,
@@ -372,10 +443,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				38915BCD2BE37AC900CD1BF5 /* ViewController.swift in Sources */,
+				385150BF2BEBA76000696F3A /* MainViewController.swift in Sources */,
 				38E885BB2BE3915B00D1074B /* UIButton + Rx.swift in Sources */,
 				38E885AC2BE3900000D1074B /* Extensions+UIColor.swift in Sources */,
 				38E885B92BE3913C00D1074B /* AVCaptureMetadataOutput+Rx.swift in Sources */,
 				38E885A32BE38E9000D1074B /* BaseViewModel.swift in Sources */,
+				385150B92BEBA73200696F3A /* CameraViewModel.swift in Sources */,
 				38E8858E2BE385E400D1074B /* SceneCoordinatorType.swift in Sources */,
 				38E885AE2BE3902600D1074B /* Extensions+UIFont.swift in Sources */,
 				38E885A92BE38F7400D1074B /* ViewModelBindableType.swift in Sources */,
@@ -386,12 +459,15 @@
 				38E885A02BE38E4900D1074B /* BaseViewController.swift in Sources */,
 				38E885972BE3878000D1074B /* Extensions+ObservableType.swift in Sources */,
 				38915BCB2BE37AC900CD1BF5 /* SceneDelegate.swift in Sources */,
+				385150BD2BEBA75800696F3A /* CameraViewController.swift in Sources */,
 				38E885B52BE390F600D1074B /* UITypes.swift in Sources */,
 				38E885BE2BE3918300D1074B /* RxAVCaptureMetadataOutputObjectsDelegateProxy.swift in Sources */,
 				38E885B22BE3909C00D1074B /* Extensions+UIScrollView.swift in Sources */,
 				38E885B72BE3912200D1074B /* Extensions+Dictionary.swift in Sources */,
 				38E885942BE386B200D1074B /* SceneCoordinator.swift in Sources */,
 				38E885B02BE3904600D1074B /* Extensions+CGFloat.swift in Sources */,
+				385150C22BEBA7B000696F3A /* UIButton+Style.swift in Sources */,
+				385150B72BEBA6B000696F3A /* MainViewModel.swift in Sources */,
 				38E885922BE3861500D1074B /* SceneTransitionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
