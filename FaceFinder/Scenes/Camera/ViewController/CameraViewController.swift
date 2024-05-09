@@ -42,18 +42,64 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         
         [previewView].forEach(view.addSubview(_:))
         
-//        overlay = createOverlay()
-//        [overlay, backButton].forEach(previewView.addSubview(_:))
+        overlay = createOverlay()
+        [overlay].forEach(previewView.addSubview(_:))
+        
+        self.view.sendSubviewToBack(overlay)
         
         previewView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
+    func createOverlay() -> UIView {
+        
+        let overlayView = UIView(frame: UIScreen.main.bounds)
+        overlayView.backgroundColor =  .gray/*grayscale_light_900_transparent*/
+
+        let path = CGMutablePath()
+        let size: CGFloat = 220.0
+        
+        path.addRoundedRect(in: CGRect(x: view.center.x - (size/2), y: view.center.y - size, width: size, height: size), cornerWidth: 15, cornerHeight: 15)
+        path.closeSubpath()
+        
+        let shape = CAShapeLayer()
+        shape.path = path
+        shape.contentsGravity = .resizeAspectFill
+        shape.lineWidth = 0.0
+        shape.strokeColor = UIColor.clear.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+
+        overlayView.layer.addSublayer(shape)
+        
+
+        path.addRect(CGRect(origin: .zero, size: overlayView.frame.size))
+
+        let maskLayer = CAShapeLayer()
+        maskLayer.backgroundColor = UIColor.black.cgColor
+        maskLayer.path = path
+        maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
+
+        overlayView.layer.mask = maskLayer
+        overlayView.clipsToBounds = true
+        
+//        let helpTitle = UILabel.mediumHeader
+//        helpTitle.text = .qrNotice
+//        helpTitle.textColor = .white
+//        helpTitle.textAlignment = .center
+//        helpTitle.translatesAutoresizingMaskIntoConstraints = true
+        
+//        overlayView.addSubview(helpTitle)
+
+//        helpTitle.frame = CGRect(x: 0, y: view.center.y + 32, width: view.frame.width, height: 20)
+
+        return overlayView
+    }
+    
     
     // MARK: - Permission Request -
     
-    private func checkCameraPermission() {        
+    private func checkCameraPermission() {
         if AVCaptureDevice.authorizationStatus(for: .video) == .notDetermined {
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 guard let `self` = self else { return }
@@ -77,11 +123,14 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         }
     }
     
+    
+    
     // MARK: - Bind -
     
     func bindViewModel() {
         
     }
+    
     
     
 }

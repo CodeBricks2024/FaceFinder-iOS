@@ -50,7 +50,17 @@ class MainViewController: BaseViewController, ViewModelBindableType {
         
         scanButton.rx.tap
             .observe(on: MainScheduler.instance)
-            .bind(to: input.scanAction.inputs)
+//            .bind(to: input.scanAction.inputs)
+            .subscribe({ _ in
+                let okAction = UIAlertAction(title: .check, style: .default) { _ in
+                    input.scanAction.execute()
+                }
+                
+                let cancelAction = UIAlertAction(title: .cancel, style: .default) { _ in
+                }
+                
+                self.showAlert(type: .two, title: "", message: "", okAction: okAction, cancelAction: cancelAction)
+            })
             .disposed(by: disposeBag)
     }
 }
