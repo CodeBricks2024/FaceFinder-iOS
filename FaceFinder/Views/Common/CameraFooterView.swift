@@ -16,9 +16,7 @@ class CameraFooterView: UIStackView {
         static let verticalMargin: CGFloat =  Appearance.Margin.verticalMargin
         static let footerButtonHeight: CGFloat = Appearance.Size.defaultHeight
         static let lightButtonTopMargin: CGFloat = 28
-        static let borderWidth: CGFloat = 4
         static let shutterButtonSize: CGFloat = 60
-        static let buttonRadius: CGFloat = 30
         static let lightButtonSize: CGFloat = 36
         static let finishButtonWidth: CGFloat = 60
         static let contentsViewHeight: CGFloat = 72
@@ -26,6 +24,10 @@ class CameraFooterView: UIStackView {
         struct Color {
             static let dimmedColor: UIColor = .black
             static let borderColor: UIColor = .blue
+        }
+        
+        struct Icon {
+            static let shutter: UIImage? = Appearance.Image.shutter
         }
     }
     
@@ -36,10 +38,11 @@ class CameraFooterView: UIStackView {
     lazy var contentsView = UIView.plainView
     
     lazy var shutterButon: UIButton = {
-        let button = UIButton(type: .roundedRect)
-        button.layer.cornerRadius = UI.buttonRadius
-        button.layer.borderWidth = UI.borderWidth
-        button.layer.borderColor = UI.Color.borderColor.cgColor
+        let button = UIButton()
+//        button.layer.cornerRadius = UI.buttonRadius
+//        button.layer.borderWidth = UI.borderWidth
+//        button.layer.borderColor = UI.Color.borderColor.cgColor
+        button.setImage(UI.Icon.shutter, for: .normal)
         return button
     }()
     

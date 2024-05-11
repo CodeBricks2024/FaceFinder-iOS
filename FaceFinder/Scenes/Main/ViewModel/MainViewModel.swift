@@ -25,6 +25,7 @@ protocol MainViewModelType {
 
 class MainViewModel: MainViewModelInput, MainViewModelOutput, MainViewModelType {
     
+    
     var input: MainViewModelInput { return self }
     var output: MainViewModelOutput { return self }
     

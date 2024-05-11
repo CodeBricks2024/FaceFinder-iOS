@@ -17,6 +17,9 @@
 		383F92C02BEF94290031FCF5 /* Extension+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92BF2BEF94290031FCF5 /* Extension+UIApplication.swift */; };
 		383F92C22BEF99880031FCF5 /* AVCaptureDevice+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92C12BEF99880031FCF5 /* AVCaptureDevice+Rx.swift */; };
 		383F92C42BEF99D70031FCF5 /* AVCapturePhotoOutput+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92C32BEF99D70031FCF5 /* AVCapturePhotoOutput+Rx.swift */; };
+		383F92C82BEF9CD10031FCF5 /* CapturedPhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92C72BEF9CD10031FCF5 /* CapturedPhotoData.swift */; };
+		383F92CA2BEF9EA20031FCF5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92C92BEF9EA10031FCF5 /* Constants.swift */; };
+		383F92CC2BEF9EF60031FCF5 /* Extensions+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92CB2BEF9EF60031FCF5 /* Extensions+UIImage.swift */; };
 		385150B72BEBA6B000696F3A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385150B62BEBA6B000696F3A /* MainViewModel.swift */; };
 		385150B92BEBA73200696F3A /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385150B82BEBA73200696F3A /* CameraViewModel.swift */; };
 		385150BD2BEBA75800696F3A /* CameraViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385150BC2BEBA75800696F3A /* CameraViewController2.swift */; };
@@ -65,6 +68,9 @@
 		383F92BF2BEF94290031FCF5 /* Extension+UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIApplication.swift"; sourceTree = "<group>"; };
 		383F92C12BEF99880031FCF5 /* AVCaptureDevice+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice+Rx.swift"; sourceTree = "<group>"; };
 		383F92C32BEF99D70031FCF5 /* AVCapturePhotoOutput+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVCapturePhotoOutput+Rx.swift"; sourceTree = "<group>"; };
+		383F92C72BEF9CD10031FCF5 /* CapturedPhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedPhotoData.swift; sourceTree = "<group>"; };
+		383F92C92BEF9EA10031FCF5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		383F92CB2BEF9EF60031FCF5 /* Extensions+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIImage.swift"; sourceTree = "<group>"; };
 		385150B62BEBA6B000696F3A /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		385150B82BEBA73200696F3A /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		385150BC2BEBA75800696F3A /* CameraViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController2.swift; sourceTree = "<group>"; };
@@ -124,6 +130,22 @@
 				383F92C32BEF99D70031FCF5 /* AVCapturePhotoOutput+Rx.swift */,
 			);
 			path = RxAvfoundation;
+			sourceTree = "<group>";
+		};
+		383F92C52BEF9CC80031FCF5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				383F92C62BEF9CCD0031FCF5 /* Camera */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		383F92C62BEF9CCD0031FCF5 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				383F92C72BEF9CD10031FCF5 /* CapturedPhotoData.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		385150B22BEBA68B00696F3A /* Camera */ = {
@@ -208,6 +230,7 @@
 		38915BC72BE37AC900CD1BF5 /* FaceFinder */ = {
 			isa = PBXGroup;
 			children = (
+				383F92C52BEF9CC80031FCF5 /* Model */,
 				38E885A72BE38F6E00D1074B /* Helpers */,
 				38A802CE2BEBAE3D0068ABA0 /* Views */,
 				385150C02BEBA7A500696F3A /* Style */,
@@ -348,6 +371,7 @@
 				38E885BC2BE3917F00D1074B /* Scan */,
 				38E885B32BE390EC00D1074B /* Enums */,
 				38E885A82BE38F7400D1074B /* ViewModelBindableType.swift */,
+				383F92C92BEF9EA10031FCF5 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -363,6 +387,7 @@
 				38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */,
 				38A802D72BEBB5B20068ABA0 /* Extensions+AppString.swift */,
 				383F92BF2BEF94290031FCF5 /* Extension+UIApplication.swift */,
+				383F92CB2BEF9EF60031FCF5 /* Extensions+UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -524,18 +549,21 @@
 				383F92BC2BEF92B20031FCF5 /* CameraViewController.swift in Sources */,
 				38E885B92BE3913C00D1074B /* AVCaptureMetadataOutput+Rx.swift in Sources */,
 				38E885A32BE38E9000D1074B /* BaseViewModel.swift in Sources */,
+				383F92CA2BEF9EA20031FCF5 /* Constants.swift in Sources */,
 				385150B92BEBA73200696F3A /* CameraViewModel.swift in Sources */,
 				38E8858E2BE385E400D1074B /* SceneCoordinatorType.swift in Sources */,
 				383F92BA2BEF8C650031FCF5 /* Appearance+Style.swift in Sources */,
 				38E885AE2BE3902600D1074B /* Extensions+UIFont.swift in Sources */,
 				38A802D12BEBAE480068ABA0 /* PreviewView.swift in Sources */,
 				38E885A92BE38F7400D1074B /* ViewModelBindableType.swift in Sources */,
+				383F92CC2BEF9EF60031FCF5 /* Extensions+UIImage.swift in Sources */,
 				38A802D62BEBB56B0068ABA0 /* Extensions+UIViewController.swift in Sources */,
 				383F92B62BEF8B6A0031FCF5 /* RxAVCapturePhotoCaptureDelegateProxy.swift in Sources */,
 				383F92B82BEF8B8D0031FCF5 /* UIView+Style.swift in Sources */,
 				38E885A62BE38F5A00D1074B /* SplashViewController.swift in Sources */,
 				38E885902BE3860400D1074B /* TargetScene.swift in Sources */,
 				383F92B12BEF8A650031FCF5 /* CameraView.swift in Sources */,
+				383F92C82BEF9CD10031FCF5 /* CapturedPhotoData.swift in Sources */,
 				38E8859C2BE38DBF00D1074B /* SplashViewModel.swift in Sources */,
 				38915BC92BE37AC900CD1BF5 /* AppDelegate.swift in Sources */,
 				383F92BE2BEF93F60031FCF5 /* CameraFooterView.swift in Sources */,

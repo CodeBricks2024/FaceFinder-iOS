@@ -26,7 +26,11 @@ extension Appearance {
     }
     
     enum Icon {
-//        static let arrowLeft = UIImage(named: "Arrow-left")
+        static let album = UIImage(named: "album")
     }
     
+    enum Image {
+        static let overlay = UIImage(named: "overlay")
+        static let shutter = UIImage(named: "shutter")
+    }
 }

@@ -17,6 +17,8 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         static let leadingTrailingMargin: CGFloat = Appearance.Margin.horizontalMargin
         static let verticalMargin: CGFloat =  Appearance.Margin.verticalMargin
         static let backButtonSize: CGFloat = Appearance.Size.defaultHeight
+        static let overlayWidth: CGFloat = 330.0
+        static let overalyHeight: CGFloat = overlayWidth * 1.3
     }
     
     // MARK: - ViewModel
@@ -29,6 +31,10 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
     lazy var backButton = UIButton.backButton
     lazy var cameraView = UIView.cameraView
     lazy var footerView = UIStackView.cameraFooterView
+    lazy var overlayView: UIImageView = {
+        let view = UIImageView(image: Appearance.Image.overlay)
+        return view
+    }()
     
     
     // MARK: - PHObject Properties
@@ -43,11 +49,11 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.startCaptureSession()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.startCaptureSession()
     }
     
     // MARK: - Set Up UI
@@ -55,14 +61,21 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
     override func setupUI() {
      
         [cameraView, footerView].forEach(view.addSubview(_:))
-        cameraView.addSubview(backButton)
-        
+        [backButton, overlayView].forEach(cameraView.addSubview(_:))
+
         cameraView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaInsets.bottom)
+        }
+        
+        overlayView.snp.makeConstraints { make in
+            make.width.equalTo(UI.overlayWidth)
+            make.height.equalTo(UI.overalyHeight)
+            make.center.equalTo(cameraView)
         }
         
         backButton.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.topMargin)
+            make.top.equalTo(cameraView.snp.topMargin)
             make.leading.equalToSuperview()
             make.width.height.equalTo(UI.backButtonSize)
         }
@@ -89,6 +102,34 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
             })
             .disposed(by: disposeBag)
         
+        
+        cameraView.stillImageOutput?.rx.photoOutput
+            .observe(on: MainScheduler.instance)
+            .throttle(.milliseconds(Constants.Unit.DEFAULT_MILLISECONDS), scheduler: MainScheduler.instance)
+            .unwrap()
+            .do(onNext: { [weak self] photo in
+//                self?.handleSavePhoto(photo: photo)
+                guard let photo = photo.fileDataRepresentation() else { return }
+                guard let image = UIImage(data: photo)?.makeFixOrientation() else { return }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    guard let placeHolder = self?.placeholder else { return }
+                    guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [placeHolder.localIdentifier], options: .none).firstObject, let fileName = asset.originalFilename else { return }
+                    
+                    let uploadedPath = image.saveImageLocally(fileName: fileName)
+                    let object = CapturedPhotoData(filePath: uploadedPath)
+                    self?.viewModel.input.capturedPhotoData.onNext(object)
+                }
+            })
+            .flatMap({ photo -> Observable<UIImage> in
+                guard let previewPixelBuffer = photo.previewPixelBuffer else { return .empty() }
+                let ciImage = CIImage(cvPixelBuffer: previewPixelBuffer)
+                guard let uiImage = ciImage.setOrientation() else { return .empty() }
+                return .just(uiImage)
+            })
+            .bind(to: viewModel.input.photoInputSubject)
+            .disposed(by: disposeBag)
+        
         if let device = cameraView.captureDevice {
             footerView.cameraLightButton.rx.selected
                 .observe(on: MainScheduler.instance)
@@ -105,6 +146,7 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         let output = viewModel.output
         
         
+        backButton.rx.action = input.backAction
     }
 }
 
