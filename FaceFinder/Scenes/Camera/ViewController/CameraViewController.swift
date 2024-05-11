@@ -2,28 +2,44 @@
 //  CameraViewController.swift
 //  FaceFinder
 //
-//  Created by Songkyung Min on 5/8/24.
+//  Created by Songkyung Min on 5/11/24.
 //
 
-import Foundation
 import UIKit
-import AVFoundation
+import RxSwift
 import Photos
-import SnapKit
 
 class CameraViewController: BaseViewController, ViewModelBindableType {
     
-    // MARK: - ViewModel -
+    // MARK: - Constants
+    
+    struct UI {
+        static let leadingTrailingMargin: CGFloat = Appearance.Margin.horizontalMargin
+        static let verticalMargin: CGFloat =  Appearance.Margin.verticalMargin
+        static let backButtonSize: CGFloat = Appearance.Size.defaultHeight
+    }
+    
+    // MARK: - ViewModel
     
     var viewModel: CameraViewModelType!
     
     
-    // MARK: - Private -
+    // MARK: - UI Properties
     
-    private var overlay: UIView!
-    private let captureSession = AVCaptureSession()
+    lazy var backButton = UIButton.backButton
+    lazy var cameraView = UIView.cameraView
+    lazy var footerView = UIStackView.cameraFooterView
     
-    private var photoDelegate: PhotoAuthorizationHandler!
+    
+    // MARK: - PHObject Properties
+    
+    var placeholder: PHObjectPlaceholder?
+    
+    // MARK: - Private
+    
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,134 +47,84 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        checkCameraPermission()
+        self.startCaptureSession()
+        self.setUI()
     }
     
-    override func setupUI() {
-        self.photoDelegate = self
+    // MARK: - Set Up UI
+    
+    func setUI() {
+        [cameraView, footerView].forEach(view.addSubview(_:))
         
-        let previewView = PreviewView(session: captureSession)
+//        self.view.addSubview(cameraView)
+//        self.view.addSubview(footerView)
+        cameraView.addSubview(backButton)
         
-        [previewView].forEach(view.addSubview(_:))
-        
-        overlay = createOverlay()
-        [overlay].forEach(previewView.addSubview(_:))
-        
-        self.view.sendSubviewToBack(overlay)
-        
-        previewView.snp.makeConstraints { make in
+        cameraView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.topMargin)
+            make.leading.equalToSuperview()
+            make.width.height.equalTo(UI.backButtonSize)
+        }
+        
+        footerView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(cameraView)
+            make.bottom.equalTo(view.snp.bottomMargin)
+        }
+        
+        cameraView.photoDelegate = self
     }
     
-    func createOverlay() -> UIView {
-        
-        let overlayView = UIView(frame: UIScreen.main.bounds)
-        overlayView.backgroundColor =  .gray/*grayscale_light_900_transparent*/
-
-        let path = CGMutablePath()
-        let size: CGFloat = 220.0
-        
-        path.addRoundedRect(in: CGRect(x: view.center.x - (size/2), y: view.center.y - size, width: size, height: size), cornerWidth: 15, cornerHeight: 15)
-        path.closeSubpath()
-        
-        let shape = CAShapeLayer()
-        shape.path = path
-        shape.contentsGravity = .resizeAspectFill
-        shape.lineWidth = 0.0
-        shape.strokeColor = UIColor.clear.cgColor
-        shape.fillColor = UIColor.clear.cgColor
-
-        overlayView.layer.addSublayer(shape)
-        
-
-        path.addRect(CGRect(origin: .zero, size: overlayView.frame.size))
-
-        let maskLayer = CAShapeLayer()
-        maskLayer.backgroundColor = UIColor.black.cgColor
-        maskLayer.path = path
-        maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
-
-        overlayView.layer.mask = maskLayer
-        overlayView.clipsToBounds = true
-        
-//        let helpTitle = UILabel.mediumHeader
-//        helpTitle.text = .qrNotice
-//        helpTitle.textColor = .white
-//        helpTitle.textAlignment = .center
-//        helpTitle.translatesAutoresizingMaskIntoConstraints = true
-        
-//        overlayView.addSubview(helpTitle)
-
-//        helpTitle.frame = CGRect(x: 0, y: view.center.y + 32, width: view.frame.width, height: 20)
-
-        return overlayView
-    }
+    // MARK: - Start CameraView AVCaptureSession
     
-    
-    // MARK: - Permission Request -
-    
-    private func checkCameraPermission() {
-        if AVCaptureDevice.authorizationStatus(for: .video) == .notDetermined {
-            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
-                guard let `self` = self else { return }
-                if !granted {
-                    self.accessRequestCamera(.video)
-                }
-            }
-        } else if AVCaptureDevice.authorizationStatus(for: .video) == .denied {
-            self.accessRequestCamera(.video)
+    func startCaptureSession() {
+        
+        cameraView.start { error in
+            debugPrint("error check: \(error)")
         }
     }
     
-    private func accessRequestCamera(_ type: AVMediaType) {
-        // Prompting user for the permission to use the camera.
-        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: type)
-        
-        AVCaptureDevice.requestAccess(for: type) { granted in
-            DispatchQueue.main.async {
-                self.photoDelegate.AVCaptureDeviceDidChangeAuthorization(status: cameraAuthorizationStatus)
-            }
-        }
-    }
-    
-    
-    
-    // MARK: - Bind -
+    // MARK: - Bind
     
     func bindViewModel() {
+        let input = viewModel.input
+        let output = viewModel.output
+        
         
     }
-    
-    
-    
 }
+
+// MARK: - PhotoAuthorizationHandler
 
 extension CameraViewController: PhotoAuthorizationHandler {
     func AVCaptureDeviceDidChangeAuthorization(status: AVAuthorizationStatus) {
+        debugPrint("AVCaptureDeviceDidChangeAuthorization status: \(status.rawValue)")
         switch status {
-            case .denied, .notDetermined:
-                let okAction = UIAlertAction(title: .check, style: .default) { _ in
-                    if let url = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(url)
-                    }
-                }
-                self.showAlert(type: .two, title: .askCameraAccessTitle, message: .askCameraAccessContents, okAction: okAction, cancelAction: UIAlertAction(title: .close, style: .default, handler: nil))
-                return
-
-            case .authorized:
-                return
-
-            case .restricted:
-                return
-
-            @unknown default:
-                return
+        case .denied, .notDetermined:
+            //            let okAction = UIAlertAction(title: .check, style: .default) { _ in
+            //                if let url = URL(string: UIApplication.openSettingsURLString) {
+            //                    UIApplication.shared.open(url)
+            //                }
+            //            }
+            //            self.showAlert(type: .two, title: .askCameraAccessTitle, message: .askCameraAccessContents, okAction: okAction, cancelAction: UIAlertAction(title: .close, style: .default, handler: nil))
+            //            return
+            
+            return
+            
+        case .authorized:
+            return
+            
+        case .restricted:
+            return
+            
+        @unknown default:
+            return
         }
     }
     
-    func PHPhotoLibraryDidChangeAuthorization(status: PHAuthorizationStatus) {
-        
-    }
+    func PHPhotoLibraryDidChangeAuthorization(status: PHAuthorizationStatus) {}
 }
+

@@ -20,11 +20,11 @@ class BaseViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = .white
         
-        self.setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setupUI()
     }
     
     // MARK: - Set Up UI -
