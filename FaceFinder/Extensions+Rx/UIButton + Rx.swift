@@ -30,24 +30,6 @@ extension Reactive where Base: UIButton {
 }
 
 extension Reactive where Base: UIButton {
-    /// Alternated with button taps to provide
-    /// a checkbox behavior by `UIButton`
-    var checked: ControlProperty<Bool> {
-        let button = self.base
-        let source: Observable<Bool> = self.tap
-            .map {[weak button] in
-                guard let state = button?.isSelected else {
-                    return false
-                }
-                return !state
-        }
-        let binder: AnyObserver<Bool> = self.isSelected.asObserver()
-
-        return ControlProperty(values: source, valueSink: binder)
-    }
-}
-
-extension Reactive where Base: UIButton {
   var isSelectedCheck: Observable<Bool> {
     let anyObservable = self.base.rx.methodInvoked(#selector(setter: self.base.isSelected))
     let boolObservable = anyObservable
@@ -58,4 +40,21 @@ extension Reactive where Base: UIButton {
 
     return boolObservable
   }
+    
+    /// Alternated with button taps to provide
+    /// a checkbox behavior by `UIButton`
+    var selected: ControlProperty<Bool> {
+        let button = self.base
+        let source: Observable<Bool> = self.tap
+            .map {[weak button] in
+                guard let state = button?.isSelected else {
+                    return false
+                }
+                button?.isSelected.toggle()
+                return !state
+        }
+        let binder: AnyObserver<Bool> = self.isSelected.asObserver()
+
+        return ControlProperty(values: source, valueSink: binder)
+    }
 }

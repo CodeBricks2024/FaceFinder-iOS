@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
+class BaseViewController: UIViewController {
     
     
     override func viewDidLoad() {
@@ -20,15 +20,16 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = .white
         
-        self.setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setupUI()
     }
     
     // MARK: - Set Up UI -
     
     func setupUI() {
+        view.backgroundColor = .white
     }
 }
