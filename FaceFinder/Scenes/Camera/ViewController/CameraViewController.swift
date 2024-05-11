@@ -48,16 +48,13 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.startCaptureSession()
-        self.setUI()
     }
     
     // MARK: - Set Up UI
     
-    func setUI() {
+    override func setupUI() {
+     
         [cameraView, footerView].forEach(view.addSubview(_:))
-        
-//        self.view.addSubview(cameraView)
-//        self.view.addSubview(footerView)
         cameraView.addSubview(backButton)
         
         cameraView.snp.makeConstraints { make in
@@ -85,6 +82,20 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         cameraView.start { error in
             debugPrint("error check: \(error)")
         }
+        
+        cameraView.stillImageOutput?.rx.capturePhoto(formats: [AVVideoCodecKey: AVVideoCodecType.jpeg], button: footerView.shutterButon.rx.tap)
+            .subscribe(onNext: { _ in
+                // TODO: - ADD LATER
+            })
+            .disposed(by: disposeBag)
+        
+        if let device = cameraView.captureDevice {
+            footerView.cameraLightButton.rx.selected
+                .observe(on: MainScheduler.instance)
+                .bind(to: device.rx.toggleTorch)
+                .disposed(by: disposeBag)
+        }
+        
     }
     
     // MARK: - Bind
