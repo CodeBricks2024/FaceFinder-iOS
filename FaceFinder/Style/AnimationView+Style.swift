@@ -11,12 +11,9 @@ extension AnimationView {
         
     static var mainAnimationView: AnimationView = {
         let anim = AnimationView()
-        anim.translatesAutoresizingMaskIntoConstraints = false
-        anim.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.264).isActive = true
-        anim.heightAnchor.constraint(equalTo: anim.widthAnchor).isActive = true
         anim.sizeToFit()
         anim.backgroundBehavior = .pauseAndRestore
-        anim.animation = Animation.named("loading")
+        anim.animation = Animation.named("mainLoading")
         anim.isUserInteractionEnabled = true
         return anim
     }()

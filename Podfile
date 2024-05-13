@@ -11,6 +11,7 @@ def libraries_reactive
 	# Rx
 	pod 'RxSwift', '~> 6'
   pod 'RxCocoa', '~> 6'
+  pod 'RxGesture'
   pod 'Action', '~> 5.0'
   pod 'lottie-ios'
 

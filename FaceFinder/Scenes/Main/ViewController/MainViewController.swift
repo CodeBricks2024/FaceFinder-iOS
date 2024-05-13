@@ -9,19 +9,20 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 import Lottie
 
 class MainViewController: BaseViewController, ViewModelBindableType {
-    
     
     // MARK: - Constants -
     
     struct UI {
         static let leadingTrailingMargin: CGFloat = Appearance.Margin.horizontalMargin * 2
         static let buttonHeight: CGFloat = 74
+        static let imgSize: CGFloat = 50
+        static let animSize: CGFloat = 300.0
         
     }
-    
     
     // MARK: - ViewModel -
     
@@ -32,7 +33,12 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     let scanButton = UIButton.bottomButton
     let animationView = AnimationView.mainAnimationView
     
-    
+    lazy var scanImage: UIImageView = {
+        let img = UIImageView()
+        img.image = Appearance.Icon.scanzone
+        img.contentMode = .scaleAspectFill
+        return img
+    }()
     
     // MARK: - Private -
     
@@ -40,20 +46,26 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.showAnim()
     }
     
     // MARK: - Set Up UI -
     
     override func setupUI() {
-        
         scanButton.setTitle(.scan, for: .normal)
-        view.addSubview(scanButton)
+        
+        [animationView, scanButton].forEach(view.addSubview(_:))
+        animationView.addSubview(scanImage)
      
+        animationView.snp.makeConstraints { make in
+            make.width.height.equalTo(UI.animSize)
+            make.centerY.equalTo(view.snp.centerY)
+            make.centerX.equalTo(view.snp.centerX)
+        }
         
         scanButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(UI.leadingTrailingMargin)
@@ -61,6 +73,25 @@ class MainViewController: BaseViewController, ViewModelBindableType {
             make.height.equalTo(UI.buttonHeight)
             make.bottom.equalTo(view.snp.bottomMargin)
         }
+        
+        scanImage.snp.makeConstraints { make in
+            make.width.height.equalTo(UI.imgSize)
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        animationView.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                // TODO: - ADD LATER
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    private func showAnim() {
+        animationView.loopMode = .loop
+        animationView.play()
     }
 
     // MARK: - Bind -
