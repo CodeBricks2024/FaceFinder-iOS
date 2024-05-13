@@ -12,7 +12,7 @@ enum Appearance {}
 extension Appearance {
  
     enum Layer {
-        static let defaultRadius: CGFloat = 5.0
+        static let defaultRadius: CGFloat = 10.0
     }
     
     enum Margin {

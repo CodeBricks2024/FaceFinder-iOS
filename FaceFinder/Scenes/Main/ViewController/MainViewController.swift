@@ -9,16 +9,33 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import Lottie
 
 class MainViewController: BaseViewController, ViewModelBindableType {
+    
+    
+    // MARK: - Constants -
+    
+    struct UI {
+        static let leadingTrailingMargin: CGFloat = Appearance.Margin.horizontalMargin * 2
+        static let buttonHeight: CGFloat = 74
+        
+    }
+    
     
     // MARK: - ViewModel -
     
     var viewModel: MainViewModelType!
     
+    // MARK: - UI Properties -
+    
+    let scanButton = UIButton.bottomButton
+    let animationView = AnimationView.mainAnimationView
+    
+    
+    
     // MARK: - Private -
     
-    private var scanButton = UIButton.scanButton
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -34,12 +51,16 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     
     override func setupUI() {
         
+        scanButton.setTitle(.scan, for: .normal)
         view.addSubview(scanButton)
      
-        NSLayoutConstraint.activate([
-            scanButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scanButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        ])
+        
+        scanButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(UI.leadingTrailingMargin)
+            make.trailing.equalToSuperview().offset(-(UI.leadingTrailingMargin))
+            make.height.equalTo(UI.buttonHeight)
+            make.bottom.equalTo(view.snp.bottomMargin)
+        }
     }
 
     // MARK: - Bind -
