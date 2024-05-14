@@ -28,6 +28,7 @@ extension Appearance {
     enum Icon {
         static let album = UIImage(named: "album")
         static let scanzone = UIImage(named: "scanzone")
+        static let back = UIImage(named: "back")
         
     }
     

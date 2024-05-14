@@ -30,6 +30,8 @@
 		38915BCD2BE37AC900CD1BF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38915BCC2BE37AC900CD1BF5 /* ViewController.swift */; };
 		38915BD22BE37ADC00CD1BF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38915BD12BE37ADC00CD1BF5 /* Assets.xcassets */; };
 		38915BD52BE37ADC00CD1BF5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 38915BD42BE37ADC00CD1BF5 /* Base */; };
+		389C7C9E2BF2F2250030790F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389C7C9D2BF2F2250030790F /* ResultViewController.swift */; };
+		389C7CA02BF2F2420030790F /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389C7C9F2BF2F2420030790F /* ResultViewModel.swift */; };
 		38A802D12BEBAE480068ABA0 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D02BEBAE480068ABA0 /* PreviewView.swift */; };
 		38A802D42BEBB3F90068ABA0 /* CustomHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */; };
 		38A802D62BEBB56B0068ABA0 /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */; };
@@ -84,6 +86,8 @@
 		38915BD12BE37ADC00CD1BF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38915BD42BE37ADC00CD1BF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38915BD62BE37ADC00CD1BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		389C7C9D2BF2F2250030790F /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		389C7C9F2BF2F2420030790F /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
 		38A802D02BEBAE480068ABA0 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHandlers.swift; sourceTree = "<group>"; };
 		38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
@@ -254,6 +258,31 @@
 			path = FaceFinder;
 			sourceTree = "<group>";
 		};
+		389C7C9A2BF2F20E0030790F /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				389C7C9C2BF2F2190030790F /* ViewModel */,
+				389C7C9B2BF2F2130030790F /* ViewController */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		389C7C9B2BF2F2130030790F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				389C7C9D2BF2F2250030790F /* ResultViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		389C7C9C2BF2F2190030790F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				389C7C9F2BF2F2420030790F /* ResultViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		38A802CE2BEBAE3D0068ABA0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +349,7 @@
 		38E885982BE38D9900D1074B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				389C7C9A2BF2F20E0030790F /* Result */,
 				385150B32BEBA69300696F3A /* Main */,
 				385150B22BEBA68B00696F3A /* Camera */,
 				38E8859D2BE38E3600D1074B /* Common */,
@@ -565,6 +595,7 @@
 				38E885B92BE3913C00D1074B /* AVCaptureMetadataOutput+Rx.swift in Sources */,
 				38E885A32BE38E9000D1074B /* BaseViewModel.swift in Sources */,
 				383F92CA2BEF9EA20031FCF5 /* Constants.swift in Sources */,
+				389C7C9E2BF2F2250030790F /* ResultViewController.swift in Sources */,
 				385150B92BEBA73200696F3A /* CameraViewModel.swift in Sources */,
 				38E8858E2BE385E400D1074B /* SceneCoordinatorType.swift in Sources */,
 				383F92BA2BEF8C650031FCF5 /* Appearance+Style.swift in Sources */,
@@ -585,6 +616,7 @@
 				383F92BE2BEF93F60031FCF5 /* CameraFooterView.swift in Sources */,
 				38E885A02BE38E4900D1074B /* BaseViewController.swift in Sources */,
 				38E885972BE3878000D1074B /* Extensions+ObservableType.swift in Sources */,
+				389C7CA02BF2F2420030790F /* ResultViewModel.swift in Sources */,
 				383F92B42BEF8B0A0031FCF5 /* CustomAVCapturePhotoOutput.swift in Sources */,
 				38A802D82BEBB5B20068ABA0 /* Extensions+AppString.swift in Sources */,
 				38915BCB2BE37AC900CD1BF5 /* SceneDelegate.swift in Sources */,

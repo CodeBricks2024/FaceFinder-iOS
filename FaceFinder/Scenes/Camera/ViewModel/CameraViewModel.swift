@@ -18,6 +18,7 @@ protocol CameraViewModelInput: BaseViewModelInput {
     var photoInputSubject: PublishSubject<UIImage?> { get }
     /// Capture된 Photo의 fileName과 file 경로를 CapturedPhotoData 객체화하여 전달
     var capturedPhotoData: PublishSubject<CapturedPhotoData?> { get }
+    
 }
 
 protocol CameraViewModelOutput: BaseViewModelOutput {
@@ -48,7 +49,7 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
         }
     }()
     
-    
+
     var photoInputSubject = PublishSubject<UIImage?>()
     var capturedPhotoData = PublishSubject<CapturedPhotoData?>()
     

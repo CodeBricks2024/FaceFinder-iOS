@@ -33,6 +33,9 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     let scanButton = UIButton.bottomButton
     let animationView = AnimationView.mainAnimationView
     
+    // TODO: DELETE LATER
+    lazy var resultButton = UIButton.bottomButton
+    
     lazy var scanImage: UIImageView = {
         let img = UIImageView()
         img.image = Appearance.Icon.scanzone
@@ -58,7 +61,7 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     override func setupUI() {
         scanButton.setTitle(.scan, for: .normal)
         
-        [animationView, scanButton].forEach(view.addSubview(_:))
+        [animationView, scanButton, resultButton].forEach(view.addSubview(_:))
         animationView.addSubview(scanImage)
      
         animationView.snp.makeConstraints { make in
@@ -72,6 +75,13 @@ class MainViewController: BaseViewController, ViewModelBindableType {
             make.trailing.equalToSuperview().offset(-(UI.leadingTrailingMargin))
             make.height.equalTo(UI.buttonHeight)
             make.bottom.equalTo(view.snp.bottomMargin)
+        }
+        
+        resultButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(UI.leadingTrailingMargin)
+            make.trailing.equalToSuperview().offset(-(UI.leadingTrailingMargin))
+            make.height.equalTo(UI.buttonHeight)
+            make.bottom.equalTo(scanButton.snp.topMargin).offset(-(UI.leadingTrailingMargin))
         }
         
         scanImage.snp.makeConstraints { make in
@@ -114,5 +124,8 @@ class MainViewController: BaseViewController, ViewModelBindableType {
                 self.showAlert(type: .two, title: "", message: "", okAction: okAction, cancelAction: cancelAction)
             })
             .disposed(by: disposeBag)
+        
+        
+        resultButton.rx.action = input.resultAction
     }
 }

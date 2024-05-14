@@ -15,6 +15,7 @@ enum Scene {
     case splash(SplashViewModel)
     case main(MainViewModel)
     case camera(CameraViewModel)
+    case result(ResultViewModel)
 }
 
 
@@ -34,6 +35,11 @@ extension Scene: TargetScene {
             
             case let .camera(viewModel):
                 var vc = CameraViewController()
+                vc.bind(to: viewModel)
+                return .push(vc)
+            
+            case let .result(viewModel):
+                var vc = ResultViewController()
                 vc.bind(to: viewModel)
                 return .push(vc)
         }

@@ -21,12 +21,10 @@ extension UIButton {
     
     static var backButton: UIButton {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(.add, for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.tintColor = .black
-        button.widthAnchor.constraint(equalToConstant: .defaultHeight).isActive = true
-        button.heightAnchor.constraint(equalTo: button.widthAnchor).isActive = true
+        button.backgroundColor = UIColor(white: 1.0, alpha: 0.7)
+        button.setImage(.back, for: .normal)
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.cornerRadius = Appearance.Layer.defaultRadius
         return button
     }
     
