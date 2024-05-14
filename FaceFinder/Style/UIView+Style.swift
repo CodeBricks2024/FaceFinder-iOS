@@ -12,7 +12,11 @@ extension UIView {
     static var plainView: UIView {
         let view = UIView()
         view.backgroundColor = .clear
-
+        return view
+    }
+    
+    static var mainHeaderView: MainHeaderView {
+        let view = MainHeaderView()
         return view
     }
     
@@ -39,7 +43,6 @@ extension UIView {
 
         overlayView.layer.addSublayer(shape)
         
-
         path.addRect(CGRect(origin: .zero, size: overlayView.frame.size))
 
         let maskLayer = CAShapeLayer()

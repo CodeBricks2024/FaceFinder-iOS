@@ -32,6 +32,7 @@
 		38915BD52BE37ADC00CD1BF5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 38915BD42BE37ADC00CD1BF5 /* Base */; };
 		389C7C9E2BF2F2250030790F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389C7C9D2BF2F2250030790F /* ResultViewController.swift */; };
 		389C7CA02BF2F2420030790F /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389C7C9F2BF2F2420030790F /* ResultViewModel.swift */; };
+		389C7CA42BF2F84B0030790F /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389C7CA32BF2F84B0030790F /* MainHeaderView.swift */; };
 		38A802D12BEBAE480068ABA0 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D02BEBAE480068ABA0 /* PreviewView.swift */; };
 		38A802D42BEBB3F90068ABA0 /* CustomHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */; };
 		38A802D62BEBB56B0068ABA0 /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */; };
@@ -88,6 +89,7 @@
 		38915BD62BE37ADC00CD1BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		389C7C9D2BF2F2250030790F /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		389C7C9F2BF2F2420030790F /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
+		389C7CA32BF2F84B0030790F /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		38A802D02BEBAE480068ABA0 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHandlers.swift; sourceTree = "<group>"; };
 		38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				38A802D02BEBAE480068ABA0 /* PreviewView.swift */,
 				383F92B02BEF8A650031FCF5 /* CameraView.swift */,
 				383F92BD2BEF93F60031FCF5 /* CameraFooterView.swift */,
+				389C7CA32BF2F84B0030790F /* MainHeaderView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				38E885BE2BE3918300D1074B /* RxAVCaptureMetadataOutputObjectsDelegateProxy.swift in Sources */,
 				38E885B22BE3909C00D1074B /* Extensions+UIScrollView.swift in Sources */,
 				38E885B72BE3912200D1074B /* Extensions+Dictionary.swift in Sources */,
+				389C7CA42BF2F84B0030790F /* MainHeaderView.swift in Sources */,
 				383F92C42BEF99D70031FCF5 /* AVCapturePhotoOutput+Rx.swift in Sources */,
 				38E885942BE386B200D1074B /* SceneCoordinator.swift in Sources */,
 				383F92C22BEF99880031FCF5 /* AVCaptureDevice+Rx.swift in Sources */,

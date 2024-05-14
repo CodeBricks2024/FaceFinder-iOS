@@ -23,13 +23,14 @@ extension Appearance {
     
     enum Size {
         static let defaultHeight: CGFloat = 56.0
+        static let headerHeight: CGFloat = 49.0
     }
     
     enum Icon {
         static let album = UIImage(named: "album")
         static let scanzone = UIImage(named: "scanzone")
         static let back = UIImage(named: "back")
-        
+        static let logo = UIImage(named: "Logo")
     }
     
     enum Image {

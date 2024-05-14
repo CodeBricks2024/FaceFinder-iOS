@@ -21,6 +21,7 @@ class MainViewController: BaseViewController, ViewModelBindableType {
         static let buttonHeight: CGFloat = 74
         static let imgSize: CGFloat = 50
         static let animSize: CGFloat = 300.0
+        static let headerSize: CGFloat = Appearance.Size.headerHeight
         
     }
     
@@ -30,6 +31,7 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     
     // MARK: - UI Properties -
     
+    let headerView = UIView.mainHeaderView
     let scanButton = UIButton.bottomButton
     let animationView = AnimationView.mainAnimationView
     
@@ -61,8 +63,14 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     override func setupUI() {
         scanButton.setTitle(.scan, for: .normal)
         
-        [animationView, scanButton, resultButton].forEach(view.addSubview(_:))
+        [headerView, animationView, scanButton, resultButton].forEach(view.addSubview(_:))
         animationView.addSubview(scanImage)
+        
+        headerView.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.topMargin)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(UI.headerSize)
+        }
      
         animationView.snp.makeConstraints { make in
             make.width.height.equalTo(UI.animSize)
