@@ -20,8 +20,6 @@ class CameraView: UIView {
     var captureSession: AVCaptureSession!
     /// AVCapturePhotoOutput
     var stillImageOutput: CustomAVCapturePhotoOutput?
-    /// PhotoAuthorizationHandler Delegate
-    var photoDelegate: PhotoAuthorizationHandler!
     
     
     func start(completion: ((_ error: String?)->Void) ) {
@@ -85,12 +83,10 @@ class CameraView: UIView {
     private func captureDeviceDidChangeAuthNotify(_ type: AVMediaType) {
         // Prompting user for the permission to use the camera.
         let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: type)
-        guard let photoDelegate = self.photoDelegate else { return }
-        photoDelegate.AVCaptureDeviceDidChangeAuthorization(status: cameraAuthorizationStatus)
+        
     }
     
     deinit {
-        debugPrint("cameraview delegate deinit: \(CFGetRetainCount(self)), \(self.photoDelegate)")
     }
     
     // MARK: - Session Stop

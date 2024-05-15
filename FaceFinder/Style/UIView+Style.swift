@@ -59,6 +59,14 @@ extension UIView {
 
 extension UIStackView {
     
+    static var horizontalStackView: UIStackView {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.isLayoutMarginsRelativeArrangement = true
+        return view
+    }
+    
     static var cameraFooterView: CameraFooterView {
         let view = CameraFooterView()
         return view

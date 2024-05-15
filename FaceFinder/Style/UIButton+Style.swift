@@ -28,4 +28,15 @@ extension UIButton {
         return button
     }
     
+    static var albumButton: UIButton {
+        let button = UIButton()
+        button.setImage(.album, for: .normal)
+        return button
+    }
+    
+    static var cameraSwitchButton: UIButton {
+        let button = UIButton()
+        button.setImage(.switch, for: .normal)
+        return button
+    }
 }
