@@ -14,6 +14,7 @@ import Action
 protocol CameraViewModelInput: BaseViewModelInput {
     var backAction: CocoaAction { get }
     var dismissAction: CocoaAction { get }
+    var moveAction: Action<UIImage, Void> { get }
     /// AVCapturePhotoOutput을 통하여 변환된 이미지를 전달
     var photoInputSubject: PublishSubject<UIImage?> { get }
     /// Capture된 Photo의 fileName과 file 경로를 CapturedPhotoData 객체화하여 전달
@@ -49,7 +50,13 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
         }
     }()
     
-
+    lazy var moveAction: Action<UIImage, Void> = {
+        return Action<UIImage, Void> { [unowned self] input in
+            let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator)
+            return self.sceneCoordinator.transition(to: Scene.result(vm))
+        }
+    }()
+    
     var photoInputSubject = PublishSubject<UIImage?>()
     var capturedPhotoData = PublishSubject<CapturedPhotoData?>()
     

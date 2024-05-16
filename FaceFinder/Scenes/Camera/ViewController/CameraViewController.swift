@@ -105,27 +105,27 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         PHPhotoLibrary.requestAuthorization { status in
             print("lib status: \(status)")
             switch status {
-                case .authorized:
-                    DispatchQueue.main.async {
-                        self.openAlbum()
-                    }
-                    break
-                case .denied:
-                    DispatchQueue.main.async {
-                        let okAction = UIAlertAction(title: .check, style: .default) { _ in
-                            if let url = URL(string: UIApplication.openSettingsURLString) {
-                                UIApplication.shared.open(url)
-                            }
+            case .authorized:
+                DispatchQueue.main.async {
+                    self.openAlbum()
+                }
+                break
+            case .denied:
+                DispatchQueue.main.async {
+                    let okAction = UIAlertAction(title: .check, style: .default) { _ in
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
                         }
-                        self.showAlert(type: .two, title: .askAlbumAccessTitle, message: .albumNotAvailable, okAction: okAction, cancelAction: UIAlertAction(title: .close, style: .default, handler: nil))
                     }
+                    self.showAlert(type: .two, title: .askAlbumAccessTitle, message: .albumNotAvailable, okAction: okAction, cancelAction: UIAlertAction(title: .close, style: .default, handler: nil))
+                }
                 
-                    break
+                break
                 
-                case .notDetermined:
-                    break
-                default:
-                    break
+            case .notDetermined:
+                break
+            default:
+                break
             }
         }
     }
@@ -213,13 +213,25 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
             .bind(to: viewModel.input.photoInputSubject)
             .disposed(by: disposeBag)
         
-//        if let device = cameraView.captureDevice {
-//            footerView.cameraSwitchButton.rx.selected
-//                .observe(on: MainScheduler.instance)
-//                .bind(to: device.rx.toggleTorch)
-//                .disposed(by: disposeBag)
-//        }
         
+            footerView.cameraSwitchButton.rx.tap
+                .observe(on: MainScheduler.instance)
+//                    .bind(to: device.rx.toggleTorch)
+                .subscribe(onNext: { [unowned self] _ in
+                    print("selected: \(cameraView.captureDevice.position)")
+                    //                    setCamera(position: .back)
+                    if cameraView.captureDevice.position == .back {
+                        
+                        cameraView.switchCamera(position: .front)
+                    } else {
+                        
+                        cameraView.switchCamera(position: .back)
+                    }
+                })
+                .disposed(by: disposeBag)
+        
+            if let device = cameraView.captureDevice {
+            }
     }
     
     // MARK: - Bind

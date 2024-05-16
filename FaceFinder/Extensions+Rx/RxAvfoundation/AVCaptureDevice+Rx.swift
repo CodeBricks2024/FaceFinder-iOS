@@ -31,4 +31,16 @@ extension Reactive where Base: AVCaptureDevice {
             }
         }
     }
+    
+    
+    // MARK: - Toggle Camera Position
+    
+//    public var toggleCameraPositionkk: Binder<Bool> {
+//        return Binder(self.base) { device, position in
+//            
+//            device.position = .back
+//        }
+//    }
+//    
+    
 }
