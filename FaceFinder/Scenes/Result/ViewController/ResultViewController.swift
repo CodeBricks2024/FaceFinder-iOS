@@ -15,7 +15,8 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     
     struct UI {
         static let leadingTrailingMargin: CGFloat = Appearance.Margin.horizontalMargin
-        static let backButtonSize: CGFloat = Appearance.Size.defaultHeight
+        
+        static let navHeight: CGFloat = Appearance.Size.headerHeight
     }
     
     
@@ -25,8 +26,7 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     
     // MARK: - UI Properties
     
-    lazy var backButton = UIButton.backButton
-    
+    lazy var navView = UIView.navView
     
     // MARK: - Private
     
@@ -40,17 +40,19 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
 
     // MARK: - Set Up UI
     
     override func setupUI() {
-        [backButton].forEach(view.addSubview(_:))
+        navView.titleLabel.text = .resultTitle
+        [navView].forEach(view.addSubview(_:))
         
-        backButton.snp.makeConstraints { make in
+        navView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin)
-            make.leading.equalToSuperview()
-            make.width.height.equalTo(UI.backButtonSize)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(UI.navHeight)
         }
     }
 
@@ -60,15 +62,7 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
         let input = viewModel.input
         let output = viewModel.output
         
-        
-        backButton.rx.action = input.backAction
-        
-        
+        navView.backButton.rx.action = input.backAction
         
     }
-    
-    
-    
-    
-    
 }

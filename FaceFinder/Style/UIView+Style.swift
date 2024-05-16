@@ -15,6 +15,11 @@ extension UIView {
         return view
     }
     
+    static var navView: NavigationView {
+        let view = NavigationView()
+        return view
+    }
+    
     static var mainHeaderView: MainHeaderView {
         let view = MainHeaderView()
         return view
@@ -72,4 +77,15 @@ extension UIStackView {
         return view
     }
     
+}
+
+extension UIImageView {
+    
+    static var roundedImgView: UIImageView {
+        let view = UIImageView()
+        view.layer.cornerRadius = Appearance.Layer.defaultRadius
+        view.layer.masksToBounds = true
+        view.contentMode = .scaleAspectFill
+        return view
+    }
 }

@@ -23,7 +23,7 @@ extension Appearance {
     
     enum Size {
         static let defaultHeight: CGFloat = 56.0
-        static let headerHeight: CGFloat = 49.0
+        static let headerHeight: CGFloat = 50.0
         static let iconSize: CGFloat = 30.0
     }
     
@@ -38,5 +38,10 @@ extension Appearance {
     enum Image {
         static let overlay = UIImage(named: "overlay")
         static let shutter = UIImage(named: "shutter")
+    }
+    
+    enum Font {
+        static let mediumSize: CGFloat = 24.0
+        static let regularSize: CGFloat = 16.0
     }
 }

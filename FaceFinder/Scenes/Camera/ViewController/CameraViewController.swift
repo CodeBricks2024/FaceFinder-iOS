@@ -89,7 +89,7 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(cameraView.snp.topMargin)
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().offset(UI.verticalMargin)
             make.width.height.equalTo(UI.backButtonSize)
         }
         
@@ -283,4 +283,15 @@ extension CameraViewController: PhotoAuthorizationHandler {
 
 extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.viewModel.input.photoInputSubject.onNext(image)
+        }
+        
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
 }

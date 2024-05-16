@@ -33,6 +33,8 @@
 		389C7C9E2BF2F2250030790F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389C7C9D2BF2F2250030790F /* ResultViewController.swift */; };
 		389C7CA02BF2F2420030790F /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389C7C9F2BF2F2420030790F /* ResultViewModel.swift */; };
 		389C7CA42BF2F84B0030790F /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389C7CA32BF2F84B0030790F /* MainHeaderView.swift */; };
+		389D28E62BF587BB00F9D654 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389D28E52BF587BB00F9D654 /* NavigationView.swift */; };
+		389D28E82BF5882900F9D654 /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389D28E72BF5882900F9D654 /* UILabel+Style.swift */; };
 		38A802D12BEBAE480068ABA0 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D02BEBAE480068ABA0 /* PreviewView.swift */; };
 		38A802D42BEBB3F90068ABA0 /* CustomHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */; };
 		38A802D62BEBB56B0068ABA0 /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */; };
@@ -90,6 +92,8 @@
 		389C7C9D2BF2F2250030790F /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		389C7C9F2BF2F2420030790F /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
 		389C7CA32BF2F84B0030790F /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
+		389D28E52BF587BB00F9D654 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		389D28E72BF5882900F9D654 /* UILabel+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
 		38A802D02BEBAE480068ABA0 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		38A802D32BEBB3F90068ABA0 /* CustomHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHandlers.swift; sourceTree = "<group>"; };
 		38A802D52BEBB56B0068ABA0 /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				383F92B72BEF8B8D0031FCF5 /* UIView+Style.swift */,
 				383F92B92BEF8C650031FCF5 /* Appearance+Style.swift */,
 				38C31D1E2BF0FB7200742E04 /* AnimationView+Style.swift */,
+				389D28E72BF5882900F9D654 /* UILabel+Style.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				383F92B02BEF8A650031FCF5 /* CameraView.swift */,
 				383F92BD2BEF93F60031FCF5 /* CameraFooterView.swift */,
 				389C7CA32BF2F84B0030790F /* MainHeaderView.swift */,
+				389D28E52BF587BB00F9D654 /* NavigationView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -596,6 +602,7 @@
 				38A802D42BEBB3F90068ABA0 /* CustomHandlers.swift in Sources */,
 				383F92BC2BEF92B20031FCF5 /* CameraViewController.swift in Sources */,
 				38E885B92BE3913C00D1074B /* AVCaptureMetadataOutput+Rx.swift in Sources */,
+				389D28E62BF587BB00F9D654 /* NavigationView.swift in Sources */,
 				38E885A32BE38E9000D1074B /* BaseViewModel.swift in Sources */,
 				383F92CA2BEF9EA20031FCF5 /* Constants.swift in Sources */,
 				389C7C9E2BF2F2250030790F /* ResultViewController.swift in Sources */,
@@ -604,6 +611,7 @@
 				383F92BA2BEF8C650031FCF5 /* Appearance+Style.swift in Sources */,
 				38E885AE2BE3902600D1074B /* Extensions+UIFont.swift in Sources */,
 				38A802D12BEBAE480068ABA0 /* PreviewView.swift in Sources */,
+				389D28E82BF5882900F9D654 /* UILabel+Style.swift in Sources */,
 				38E885A92BE38F7400D1074B /* ViewModelBindableType.swift in Sources */,
 				383F92CC2BEF9EF60031FCF5 /* Extensions+UIImage.swift in Sources */,
 				38A802D62BEBB56B0068ABA0 /* Extensions+UIViewController.swift in Sources */,
