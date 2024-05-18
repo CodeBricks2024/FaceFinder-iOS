@@ -21,6 +21,8 @@ class CameraFooterView: UIStackView {
         static let finishButtonWidth: CGFloat = 60
         static let contentsViewHeight: CGFloat = 72
         
+        static let buttonSize: CGFloat = 30.0
+        
         struct Color {
             static let dimmedColor: UIColor = .black
             static let borderColor: UIColor = .blue
@@ -33,32 +35,18 @@ class CameraFooterView: UIStackView {
     
     // MARK: - UI Properties
     
-    lazy var dimmedView = UIView.plainView
+    lazy var dimmedView = UIStackView.horizontalStackView
     
     lazy var contentsView = UIView.plainView
     
     lazy var shutterButon: UIButton = {
         let button = UIButton()
-//        button.layer.cornerRadius = UI.buttonRadius
-//        button.layer.borderWidth = UI.borderWidth
-//        button.layer.borderColor = UI.Color.borderColor.cgColor
         button.setImage(UI.Icon.shutter, for: .normal)
         return button
     }()
     
-    lazy var cameraLightButton = UIButton.backButton
-    
-    
-    lazy var finishButon: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UI.Color.borderColor
-        button.setTitle("finish", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = .mediumFont(with: 16)
-        button.titleLabel?.numberOfLines = 0
-        button.titleLabel?.lineBreakMode = .byWordWrapping
-        return button
-    }()
+    lazy var albumButton = UIButton.albumButton
+    lazy var cameraSwitchButton = UIButton.cameraSwitchButton
     
     // MARK: - Init
     
@@ -78,8 +66,9 @@ class CameraFooterView: UIStackView {
         dimmedView.backgroundColor = UI.Color.dimmedColor
         
         [contentsView, dimmedView].forEach(self.addArrangedSubview(_:))
-        [shutterButon, cameraLightButton].forEach(dimmedView.addSubview(_:))
-        [finishButon].forEach(contentsView.addSubview(_:))
+        
+        [albumButton,shutterButon, cameraSwitchButton].forEach(dimmedView.addArrangedSubview(_:))
+        
         
         dimmedView.snp.makeConstraints { make in
             make.height.equalTo(UI.dimmedViewHeight)
@@ -91,25 +80,7 @@ class CameraFooterView: UIStackView {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(dimmedView.snp.top)
         }
-        
-        shutterButon.snp.makeConstraints { make in
-            make.top.equalTo(dimmedView.snp.top).offset(UI.verticalMargin)
-            make.width.height.equalTo(UI.shutterButtonSize)
-            make.centerX.equalTo(dimmedView.snp.centerX)
-        }
-        
-        cameraLightButton.snp.makeConstraints { make in
-            make.top.equalTo(dimmedView.snp.top).offset(UI.lightButtonTopMargin)
-            make.width.height.equalTo(UI.lightButtonSize)
-            make.trailing.equalToSuperview().offset(-(UI.leadingTrailingMargin))
-        }
-        
-        finishButon.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.width.equalTo(UI.finishButtonWidth)
-        }
-        
+
         configureCollectionView()
     }
     

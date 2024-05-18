@@ -15,4 +15,8 @@ extension String {
     static let close = NSLocalizedString("닫기", comment: "")
     static let albumNotAvailable = NSLocalizedString("앨범에 접근할 수 없습니다.", comment: "")
     static let cameraNotAvailable = NSLocalizedString("카메라에 접근할 수 없습니다.", comment: "")
+    static let scan = NSLocalizedString("Scan", comment: "")
+    static let askAlbumAccessTitle = NSLocalizedString("앨범 접근 권한 요청", comment: "")
+    
+    static let resultTitle = NSLocalizedString("결과보기", comment: "")
 }

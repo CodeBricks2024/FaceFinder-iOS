@@ -30,5 +30,5 @@ extension Reactive where Base: AVCaptureDevice {
                 debugPrint("Torch is not available")
             }
         }
-    }
+    }    
 }

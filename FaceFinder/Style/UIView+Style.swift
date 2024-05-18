@@ -12,7 +12,16 @@ extension UIView {
     static var plainView: UIView {
         let view = UIView()
         view.backgroundColor = .clear
-
+        return view
+    }
+    
+    static var navView: NavigationView {
+        let view = NavigationView()
+        return view
+    }
+    
+    static var mainHeaderView: MainHeaderView {
+        let view = MainHeaderView()
         return view
     }
     
@@ -39,7 +48,6 @@ extension UIView {
 
         overlayView.layer.addSublayer(shape)
         
-
         path.addRect(CGRect(origin: .zero, size: overlayView.frame.size))
 
         let maskLayer = CAShapeLayer()
@@ -56,9 +64,29 @@ extension UIView {
 
 extension UIStackView {
     
+    static var horizontalStackView: UIStackView {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.isLayoutMarginsRelativeArrangement = true
+        return view
+    }
+    
     static var cameraFooterView: CameraFooterView {
         let view = CameraFooterView()
         return view
     }
     
+}
+
+extension UIImageView {
+    
+    static var roundedImgView: UIImageView {
+        let view = UIImageView()
+        view.layer.cornerRadius = Appearance.Layer.defaultRadius
+        view.layer.masksToBounds = true
+        view.contentMode = .scaleAspectFill
+        view.image = Appearance.Image.sampleImg
+        return view
+    }
 }

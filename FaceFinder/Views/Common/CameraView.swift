@@ -20,8 +20,6 @@ class CameraView: UIView {
     var captureSession: AVCaptureSession!
     /// AVCapturePhotoOutput
     var stillImageOutput: CustomAVCapturePhotoOutput?
-    /// PhotoAuthorizationHandler Delegate
-    var photoDelegate: PhotoAuthorizationHandler!
     
     
     func start(completion: ((_ error: String?)->Void) ) {
@@ -40,19 +38,9 @@ class CameraView: UIView {
         
         captureDevice = backCamera
         
-        if AVCaptureDevice.authorizationStatus(for: .video) == .notDetermined {
-            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
-                if !granted {
-                    self?.captureDeviceDidChangeAuthNotify(.video)
-                }
-            }
-        } else if AVCaptureDevice.authorizationStatus(for: .video) == .denied {
-            self.captureDeviceDidChangeAuthNotify(.video)
-        }
-        
         do {
             
-            let input = try AVCaptureDeviceInput(device: backCamera)
+            let input = try AVCaptureDeviceInput(device: captureDevice)
             stillImageOutput = CustomAVCapturePhotoOutput()//AVCapturePhotoOutput()
             
             guard let output = stillImageOutput else { return }
@@ -80,17 +68,31 @@ class CameraView: UIView {
         }
     }
     
-    // MARK: - Access Request
     
-    private func captureDeviceDidChangeAuthNotify(_ type: AVMediaType) {
-        // Prompting user for the permission to use the camera.
-        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: type)
-        guard let photoDelegate = self.photoDelegate else { return }
-        photoDelegate.AVCaptureDeviceDidChangeAuthorization(status: cameraAuthorizationStatus)
+    // MARK: - Switch Camera Position
+    
+    func switchCamera(position: AVCaptureDevice.Position) {
+        captureSession.beginConfiguration()
+            guard let currentInput = captureSession.inputs.first as? AVCaptureDeviceInput else { return }
+            captureSession.removeInput(currentInput)
+            
+            guard let newDevice = currentInput.device.position == .back ? getCamera(with: .front) : getCamera(with: .back) else { return }
+            
+            guard let newCameraInput = try? AVCaptureDeviceInput(device: newDevice) else { return }
+        
+            captureSession.addInput(newCameraInput)
+            captureSession.commitConfiguration()
+    }
+    
+    func getCamera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        let discoverSession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: position)
+        
+        return discoverSession.devices.filter {
+            $0.position == position
+        }.first
     }
     
     deinit {
-        debugPrint("cameraview delegate deinit: \(CFGetRetainCount(self)), \(self.photoDelegate)")
     }
     
     // MARK: - Session Stop
