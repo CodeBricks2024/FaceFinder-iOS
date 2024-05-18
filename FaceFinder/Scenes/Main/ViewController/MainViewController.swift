@@ -19,7 +19,6 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     struct UI {
         static let leadingTrailingMargin: CGFloat = Appearance.Margin.horizontalMargin * 2
         static let buttonHeight: CGFloat = 74
-        static let imgSize: CGFloat = 50
         static let animSize: CGFloat = 300.0
         static let headerSize: CGFloat = Appearance.Size.headerHeight
         
@@ -34,16 +33,10 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     let headerView = UIView.mainHeaderView
     let scanButton = UIButton.bottomButton
     let animationView = AnimationView.mainAnimationView
+    let centerAnimationView = AnimationView.mainCenterAnimationView
     
     // TODO: DELETE LATER
     lazy var resultButton = UIButton.bottomButton
-    
-    lazy var scanImage: UIImageView = {
-        let img = UIImageView()
-        img.image = Appearance.Icon.scanzone
-        img.contentMode = .scaleAspectFill
-        return img
-    }()
     
     // MARK: - Private -
     
@@ -64,7 +57,8 @@ class MainViewController: BaseViewController, ViewModelBindableType {
         scanButton.setTitle(.scan, for: .normal)
         
         [headerView, animationView, scanButton, resultButton].forEach(view.addSubview(_:))
-        animationView.addSubview(scanImage)
+        animationView.addSubview(centerAnimationView)
+        
         
         headerView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin)
@@ -76,6 +70,12 @@ class MainViewController: BaseViewController, ViewModelBindableType {
             make.width.height.equalTo(UI.animSize)
             make.centerY.equalTo(view.snp.centerY)
             make.centerX.equalTo(view.snp.centerX)
+        }
+        
+        centerAnimationView.snp.makeConstraints { make in
+            make.width.height.equalTo(UI.animSize/3)
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
         }
         
         scanButton.snp.makeConstraints { make in
@@ -92,12 +92,6 @@ class MainViewController: BaseViewController, ViewModelBindableType {
             make.bottom.equalTo(scanButton.snp.topMargin).offset(-(UI.leadingTrailingMargin))
         }
         
-        scanImage.snp.makeConstraints { make in
-            make.width.height.equalTo(UI.imgSize)
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        
         animationView.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { _ in
@@ -110,6 +104,9 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     private func showAnim() {
         animationView.loopMode = .loop
         animationView.play()
+        
+        centerAnimationView.loopMode = .loop
+        centerAnimationView.play()
     }
 
     // MARK: - Bind -
