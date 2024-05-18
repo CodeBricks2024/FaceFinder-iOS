@@ -86,6 +86,7 @@ extension UIImageView {
         view.layer.cornerRadius = Appearance.Layer.defaultRadius
         view.layer.masksToBounds = true
         view.contentMode = .scaleAspectFill
+        view.image = Appearance.Image.sampleImg
         return view
     }
 }

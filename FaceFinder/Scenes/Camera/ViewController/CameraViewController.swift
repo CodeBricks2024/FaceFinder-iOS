@@ -103,7 +103,6 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
     
     private func checkAlbumPermission() {
         PHPhotoLibrary.requestAuthorization { status in
-            print("lib status: \(status)")
             switch status {
             case .authorized:
                 DispatchQueue.main.async {
@@ -179,19 +178,68 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
             debugPrint("error check: \(error)")
         }
         
-        cameraView.stillImageOutput?.rx.capturePhoto(formats: [AVVideoCodecKey: AVVideoCodecType.jpeg], button: footerView.shutterButon.rx.tap)
-            .subscribe(onNext: { _ in
-                // TODO: - ADD LATER
+        footerView.cameraSwitchButton.rx.tap
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] _ in
+                guard let device = self.cameraView.captureDevice else { return }
+                device.position == .back ? self.cameraView.switchCamera(position: .front) : self.cameraView.switchCamera(position: .back)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    // MARK: - Save Photo to PhotoLibrary
+    
+    func handleSavePhoto(photo: AVCapturePhoto) {
+        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+            if status == .authorized {
+                do {
+                    try PHPhotoLibrary.shared().performChangesAndWait {
+                        guard let imageData = photo.fileDataRepresentation() else { return }
+                        
+                        let options = PHAssetResourceCreationOptions()
+                        options.shouldMoveFile = true
+                        //                         Add the compressed (JPEG) data as the main resource for the Photos asset.
+                        let creationRequest = PHAssetCreationRequest.forAsset()
+                        creationRequest.addResource(with: .photo, data: imageData, options:  options)
+                        self.placeholder = creationRequest.placeholderForCreatedAsset
+                    }
+                    
+                } catch let error {
+                    debugPrint("failed to save photo in the library: \(error.localizedDescription)")
+                }
+            } else {
+                debugPrint("status is not authorized: \(status.rawValue)")
+            }
+        }
+    }
+    
+    // MARK: - Bind
+    
+    func bindViewModel() {
+        let input = viewModel.input
+        let output = viewModel.output
+        
+        footerView.albumButton.rx.tap
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                self.checkAlbumPermission()
             })
             .disposed(by: disposeBag)
         
+        cameraView.stillImageOutput?.rx.capturePhoto(formats: [AVVideoCodecKey: AVVideoCodecType.jpeg], button: footerView.shutterButon.rx.tap)
+            .subscribe(onNext: { data in
+                // TODO: - ADD LATER
+                print("capture data: \(data)")
+            })
+            .disposed(by: disposeBag)
         
         cameraView.stillImageOutput?.rx.photoOutput
             .observe(on: MainScheduler.instance)
             .throttle(.milliseconds(Constants.Unit.DEFAULT_MILLISECONDS), scheduler: MainScheduler.instance)
             .unwrap()
             .do(onNext: { [weak self] photo in
-                //                self?.handleSavePhoto(photo: photo)
+                self?.handleSavePhoto(photo: photo)
                 guard let photo = photo.fileDataRepresentation() else { return }
                 guard let image = UIImage(data: photo)?.makeFixOrientation() else { return }
                 
@@ -213,41 +261,11 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
             .bind(to: viewModel.input.photoInputSubject)
             .disposed(by: disposeBag)
         
-        
-            footerView.cameraSwitchButton.rx.tap
-                .observe(on: MainScheduler.instance)
-//                    .bind(to: device.rx.toggleTorch)
-                .subscribe(onNext: { [unowned self] _ in
-                    print("selected: \(cameraView.captureDevice.position)")
-                    //                    setCamera(position: .back)
-                    if cameraView.captureDevice.position == .back {
-                        
-                        cameraView.switchCamera(position: .front)
-                    } else {
-                        
-                        cameraView.switchCamera(position: .back)
-                    }
-                })
-                .disposed(by: disposeBag)
-        
-            if let device = cameraView.captureDevice {
-            }
-    }
-    
-    // MARK: - Bind
-    
-    func bindViewModel() {
-        let input = viewModel.input
-        let output = viewModel.output
-        
-        footerView.albumButton.rx.tap
+        output.photoData
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                guard let `self` = self else { return }
-                self.checkAlbumPermission()
-            })
+            .unwrap()
+            .bind(to: input.moveAction.inputs)
             .disposed(by: disposeBag)
-        
         
         backButton.rx.action = input.backAction
     }
@@ -298,6 +316,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.viewModel.input.photoInputSubject.onNext(image)
+            print("picker img: \(image)")
         }
         
         picker.dismiss(animated: true)

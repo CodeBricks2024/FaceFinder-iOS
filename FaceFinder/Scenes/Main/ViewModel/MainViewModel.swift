@@ -13,9 +13,6 @@ import Action
 
 protocol MainViewModelInput: BaseViewModelInput {
     var scanAction: CocoaAction { get }
-    
-    // TODO: DELETE LATER
-    var resultAction: CocoaAction { get }
 }
 
 protocol MainViewModelOutput: BaseViewModelOutput {
@@ -38,13 +35,6 @@ class MainViewModel: MainViewModelInput, MainViewModelOutput, MainViewModelType 
         CocoaAction { [unowned self] _ in
             let vm = CameraViewModel()
             return self.sceneCoordinator.transition(to: Scene.camera(vm))
-        }
-    }()
-    
-    lazy var resultAction: CocoaAction = {
-        CocoaAction { [unowned self] _ in
-            let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator)
-            return self.sceneCoordinator.transition(to: Scene.result(vm))
         }
     }()
     

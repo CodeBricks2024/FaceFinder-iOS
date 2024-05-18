@@ -14,9 +14,10 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     // MARK: - Constants
     
     struct UI {
-        static let leadingTrailingMargin: CGFloat = Appearance.Margin.horizontalMargin
-        
+        static let imgViewVerticalMargin: CGFloat = Appearance.Margin.horizontalMargin
         static let navHeight: CGFloat = Appearance.Size.headerHeight
+        static let imgViewLeadingTrailingMargin: CGFloat = Appearance.Margin.imgViewMargin
+        static let imgWidth: CGFloat = UIScreen.main.bounds.width - imgViewLeadingTrailingMargin * 2
     }
     
     
@@ -27,6 +28,7 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     // MARK: - UI Properties
     
     lazy var navView = UIView.navView
+    lazy var originalImgview = UIImageView.roundedImgView
     
     // MARK: - Private
     
@@ -47,12 +49,19 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     
     override func setupUI() {
         navView.titleLabel.text = .resultTitle
-        [navView].forEach(view.addSubview(_:))
+        [navView, originalImgview].forEach(view.addSubview(_:))
         
         navView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(UI.navHeight)
+        }
+        
+        originalImgview.snp.makeConstraints { make in
+            make.top.equalTo(navView.snp.bottom).offset(UI.imgViewVerticalMargin)
+            make.leading.equalToSuperview().offset(UI.imgViewLeadingTrailingMargin)
+            make.trailing.equalToSuperview().offset(-(UI.imgViewLeadingTrailingMargin))
+            make.width.height.equalTo(UI.imgWidth)
         }
     }
 
@@ -61,6 +70,11 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     func bindViewModel() {
         let input = viewModel.input
         let output = viewModel.output
+        
+        output.originalPhotoImage
+            .observe(on: MainScheduler.instance)
+            .bind(to: originalImgview.rx.image)
+            .disposed(by: disposeBag)
         
         navView.backButton.rx.action = input.backAction
         

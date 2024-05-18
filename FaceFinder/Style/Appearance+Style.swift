@@ -18,6 +18,7 @@ extension Appearance {
     enum Margin {
         static let horizontalMargin: CGFloat = 24.0
         static let verticalMargin: CGFloat = 16.0
+        static let imgViewMargin: CGFloat = 47.0
     }
     
     
@@ -38,6 +39,7 @@ extension Appearance {
     enum Image {
         static let overlay = UIImage(named: "overlay")
         static let shutter = UIImage(named: "shutter")
+        static let sampleImg = UIImage(named: "sample")
     }
     
     enum Font {

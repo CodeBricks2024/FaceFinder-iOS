@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 import Action
 
-
 protocol CameraViewModelInput: BaseViewModelInput {
     var backAction: CocoaAction { get }
     var dismissAction: CocoaAction { get }
@@ -23,6 +22,8 @@ protocol CameraViewModelInput: BaseViewModelInput {
 }
 
 protocol CameraViewModelOutput: BaseViewModelOutput {
+    /// AVCapturePhotoOutput을 통해 변환된 이미지 전달
+    var photoData: Observable<UIImage?> { get }
 }
 
 protocol CameraViewModelType {
@@ -52,24 +53,25 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
     
     lazy var moveAction: Action<UIImage, Void> = {
         return Action<UIImage, Void> { [unowned self] input in
-            let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator)
+            let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, photo: input)
             return self.sceneCoordinator.transition(to: Scene.result(vm))
         }
     }()
     
     var photoInputSubject = PublishSubject<UIImage?>()
     var capturedPhotoData = PublishSubject<CapturedPhotoData?>()
-    
-    
  
     // MARK: - Output -
+ 
+    var photoData = Observable<UIImage?>.just(nil)
     
     // MARK: - Private -
     
     private let sceneCoordinator: SceneCoordinatorType
  
     init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
-        
         self.sceneCoordinator = sceneCoordinator
+        
+        photoData = photoInputSubject.asObservable()
     }
 }

@@ -21,10 +21,7 @@ extension UIButton {
     
     static var backButton: UIButton {
         let button = UIButton()
-        button.backgroundColor = UIColor(white: 1.0, alpha: 0.7)
         button.setImage(.back, for: .normal)
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.cornerRadius = Appearance.Layer.defaultRadius
         return button
     }
     

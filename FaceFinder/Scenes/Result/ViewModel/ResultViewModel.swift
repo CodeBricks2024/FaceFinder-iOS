@@ -7,12 +7,14 @@
 
 import Foundation
 import Action
+import RxSwift
 
 protocol ResultViewModelInput {
     var backAction: CocoaAction { get }
 }
 
 protocol ResultViewModelOutput {
+    var originalPhotoImage: Observable<UIImage> { get }
 }
 
 protocol ResultViewModelType {
@@ -25,7 +27,6 @@ class ResultViewModel: ResultViewModelInput, ResultViewModelOutput, ResultViewMo
     var input: ResultViewModelInput { return self }
     var output: ResultViewModelOutput { return self }
     
-    
     // MARK: - Input -
     
     lazy var backAction: CocoaAction = {
@@ -36,12 +37,14 @@ class ResultViewModel: ResultViewModelInput, ResultViewModelOutput, ResultViewMo
     
     // MARK: - Output -
     
+    var originalPhotoImage: Observable<UIImage>
     
     // MARK: - Private -
     
     private let sceneCoordinator: SceneCoordinatorType
     
-    init(sceneCoordinator: SceneCoordinatorType) {
+    init(sceneCoordinator: SceneCoordinatorType, photo: UIImage) {
         self.sceneCoordinator = sceneCoordinator
+        self.originalPhotoImage = .just(photo)
     }
 }

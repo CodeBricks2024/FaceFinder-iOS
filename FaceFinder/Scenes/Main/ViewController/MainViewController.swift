@@ -123,7 +123,5 @@ class MainViewController: BaseViewController, ViewModelBindableType {
             .bind(to: input.scanAction.inputs)
             .disposed(by: disposeBag)
         
-        
-        resultButton.rx.action = input.resultAction
     }
 }
