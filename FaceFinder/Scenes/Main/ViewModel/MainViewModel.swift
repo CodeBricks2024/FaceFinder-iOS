@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 import Action
 
-
 protocol MainViewModelInput: BaseViewModelInput {
     var scanAction: CocoaAction { get }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class CameraFooterView: UIStackView {
+    
     // MARK: - Constants
     
     struct UI {
