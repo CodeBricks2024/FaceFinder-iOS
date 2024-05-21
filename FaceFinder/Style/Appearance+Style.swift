@@ -21,7 +21,6 @@ extension Appearance {
         static let imgViewMargin: CGFloat = 47.0
     }
     
-    
     enum Size {
         static let defaultHeight: CGFloat = 56.0
         static let headerHeight: CGFloat = 50.0

@@ -21,7 +21,6 @@ class MainViewController: BaseViewController, ViewModelBindableType {
         static let buttonHeight: CGFloat = 74
         static let animSize: CGFloat = 300.0
         static let headerSize: CGFloat = Appearance.Size.headerHeight
-        
     }
     
     // MARK: - ViewModel -
@@ -58,7 +57,6 @@ class MainViewController: BaseViewController, ViewModelBindableType {
         
         [headerView, animationView, scanButton, resultButton].forEach(view.addSubview(_:))
         animationView.addSubview(centerAnimationView)
-        
         
         headerView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin)
@@ -98,7 +96,6 @@ class MainViewController: BaseViewController, ViewModelBindableType {
                 // TODO: - ADD LATER
             })
             .disposed(by: disposeBag)
-        
     }
     
     private func showAnim() {
