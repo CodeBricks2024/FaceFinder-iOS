@@ -31,14 +31,17 @@ extension NetworkService: TargetType {
         switch self {
         case .sendFile(let request):
 //            return self.requestTask(request)
-            let params: [String: Any] = ["image_file":request.image_file ?? nil]
-            
+            let params: [String: Any] = ["image_file": request.image_file ?? nil]
+            print("params check: \(params)")
             var formData = [MultipartFormData]()
             for (key, value) in params {
+                print("keyval: \(key), \(value)")
                 if let imgData = value as? URL {
                     formData.append(MultipartFormData(provider: .file(imgData), name: "image", fileName: "user_image.jpg", mimeType: "image/jpg"))
+                    print("formdata1: \(formData)")
                 } else {
                     formData.append(MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: key))
+                    print("formdata2: \(formData)")
                 }
             }
             return .uploadMultipart(formData)

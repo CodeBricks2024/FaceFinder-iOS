@@ -8,5 +8,5 @@
 import Foundation
 
 public struct CompareRequest: Codable {
-    var image_file: String?
+    var image_file: Data?
 }

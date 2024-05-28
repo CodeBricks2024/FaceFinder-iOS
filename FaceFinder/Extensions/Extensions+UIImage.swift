@@ -22,6 +22,16 @@ extension UIImage {
 
         return normalizedImage
     }
+    
+    func resizeImage(newWidth: CGFloat = Appearance.Size.imageSize) -> UIImage {
+        let scale = newWidth / self.size.width // 새 이미지 확대/축소 비율
+        let newHeight = self.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        self.draw(in: CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }
 
 extension CIImage {
