@@ -55,5 +55,4 @@ extension NetworkService: TargetType {
     public var validationType: ValidationType {
         return .successCodes
     }
-    
 }

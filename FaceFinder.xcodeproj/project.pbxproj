@@ -10,6 +10,8 @@
 		383A69D52C0599FC00D1514A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69D42C0599FC00D1514A /* NetworkService.swift */; };
 		383A69D82C059BFE00D1514A /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69D72C059BFE00D1514A /* JSONSerializer.swift */; };
 		383A69DA2C059C3600D1514A /* Extensions+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69D92C059C3600D1514A /* Extensions+String.swift */; };
+		383A69DE2C059DBA00D1514A /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69DD2C059DBA00D1514A /* NetworkHandler.swift */; };
+		383A69E02C05A03C00D1514A /* FFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69DF2C05A03C00D1514A /* FFError.swift */; };
 		383F92B12BEF8A650031FCF5 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92B02BEF8A650031FCF5 /* CameraView.swift */; };
 		383F92B42BEF8B0A0031FCF5 /* CustomAVCapturePhotoOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92B32BEF8B0A0031FCF5 /* CustomAVCapturePhotoOutput.swift */; };
 		383F92B62BEF8B6A0031FCF5 /* RxAVCapturePhotoCaptureDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92B52BEF8B6A0031FCF5 /* RxAVCapturePhotoCaptureDelegateProxy.swift */; };
@@ -71,6 +73,8 @@
 		383A69D42C0599FC00D1514A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		383A69D72C059BFE00D1514A /* JSONSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
 		383A69D92C059C3600D1514A /* Extensions+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+String.swift"; sourceTree = "<group>"; };
+		383A69DD2C059DBA00D1514A /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
+		383A69DF2C05A03C00D1514A /* FFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFError.swift; sourceTree = "<group>"; };
 		383F92B02BEF8A650031FCF5 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		383F92B32BEF8B0A0031FCF5 /* CustomAVCapturePhotoOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAVCapturePhotoOutput.swift; sourceTree = "<group>"; };
 		383F92B52BEF8B6A0031FCF5 /* RxAVCapturePhotoCaptureDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxAVCapturePhotoCaptureDelegateProxy.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 		383A69D32C0599F400D1514A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				383A69DC2C059DAD00D1514A /* Common */,
 				383A69D62C059A0C00D1514A /* Service */,
 			);
 			path = Networking;
@@ -158,6 +163,15 @@
 				383A69D42C0599FC00D1514A /* NetworkService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		383A69DC2C059DAD00D1514A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				383A69DD2C059DBA00D1514A /* NetworkHandler.swift */,
+				383A69DF2C05A03C00D1514A /* FFError.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		383F92B22BEF8AF40031FCF5 /* RxAvfoundation */ = {
@@ -624,6 +638,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				383A69DE2C059DBA00D1514A /* NetworkHandler.swift in Sources */,
 				38915BCD2BE37AC900CD1BF5 /* ViewController.swift in Sources */,
 				385150BF2BEBA76000696F3A /* MainViewController.swift in Sources */,
 				38E885BB2BE3915B00D1074B /* UIButton + Rx.swift in Sources */,
@@ -667,6 +682,7 @@
 				385150BD2BEBA75800696F3A /* CameraViewController2.swift in Sources */,
 				38E885B52BE390F600D1074B /* UITypes.swift in Sources */,
 				38E885BE2BE3918300D1074B /* RxAVCaptureMetadataOutputObjectsDelegateProxy.swift in Sources */,
+				383A69E02C05A03C00D1514A /* FFError.swift in Sources */,
 				38E885B22BE3909C00D1074B /* Extensions+UIScrollView.swift in Sources */,
 				38E885B72BE3912200D1074B /* Extensions+Dictionary.swift in Sources */,
 				389C7CA42BF2F84B0030790F /* MainHeaderView.swift in Sources */,
