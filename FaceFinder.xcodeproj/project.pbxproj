@@ -49,6 +49,8 @@
 		38C31D1D2BF0FB2400742E04 /* mainLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 38C31D1C2BF0FB2400742E04 /* mainLoading.json */; };
 		38C31D1F2BF0FB7200742E04 /* AnimationView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C31D1E2BF0FB7200742E04 /* AnimationView+Style.swift */; };
 		38C734A12BF918B400F49197 /* centerLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 38C734A02BF918B400F49197 /* centerLoading.json */; };
+		38DB07062C05DD210079D06C /* CompareRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB07052C05DD210079D06C /* CompareRequest.swift */; };
+		38DB07092C05DDBF0079D06C /* CompareResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB07082C05DDBF0079D06C /* CompareResponse.swift */; };
 		38E8858E2BE385E400D1074B /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8858D2BE385E400D1074B /* SceneCoordinatorType.swift */; };
 		38E885902BE3860400D1074B /* TargetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8858F2BE3860400D1074B /* TargetScene.swift */; };
 		38E885922BE3861500D1074B /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E885912BE3861500D1074B /* SceneTransitionType.swift */; };
@@ -116,6 +118,8 @@
 		38C31D1C2BF0FB2400742E04 /* mainLoading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mainLoading.json; sourceTree = "<group>"; };
 		38C31D1E2BF0FB7200742E04 /* AnimationView+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationView+Style.swift"; sourceTree = "<group>"; };
 		38C734A02BF918B400F49197 /* centerLoading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = centerLoading.json; sourceTree = "<group>"; };
+		38DB07052C05DD210079D06C /* CompareRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareRequest.swift; sourceTree = "<group>"; };
+		38DB07082C05DDBF0079D06C /* CompareResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareResponse.swift; sourceTree = "<group>"; };
 		38E8858D2BE385E400D1074B /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		38E8858F2BE3860400D1074B /* TargetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetScene.swift; sourceTree = "<group>"; };
 		38E885912BE3861500D1074B /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 		383A69D32C0599F400D1514A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				38DB07072C05DDB80079D06C /* Response */,
+				38DB07042C05DD170079D06C /* Request */,
 				383A69E32C05A57E00D1514A /* Repository */,
 				383A69DC2C059DAD00D1514A /* Common */,
 				383A69D62C059A0C00D1514A /* Service */,
@@ -386,6 +392,22 @@
 				38C734A02BF918B400F49197 /* centerLoading.json */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		38DB07042C05DD170079D06C /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				38DB07052C05DD210079D06C /* CompareRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		38DB07072C05DDB80079D06C /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				38DB07082C05DDBF0079D06C /* CompareResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		38E8858B2BE385B300D1074B /* Coordinator */ = {
@@ -705,9 +727,11 @@
 				383F92C02BEF94290031FCF5 /* Extension+UIApplication.swift in Sources */,
 				385150BD2BEBA75800696F3A /* CameraViewController2.swift in Sources */,
 				38E885B52BE390F600D1074B /* UITypes.swift in Sources */,
+				38DB07062C05DD210079D06C /* CompareRequest.swift in Sources */,
 				38E885BE2BE3918300D1074B /* RxAVCaptureMetadataOutputObjectsDelegateProxy.swift in Sources */,
 				383A69E02C05A03C00D1514A /* FFError.swift in Sources */,
 				38E885B22BE3909C00D1074B /* Extensions+UIScrollView.swift in Sources */,
+				38DB07092C05DDBF0079D06C /* CompareResponse.swift in Sources */,
 				38E885B72BE3912200D1074B /* Extensions+Dictionary.swift in Sources */,
 				389C7CA42BF2F84B0030790F /* MainHeaderView.swift in Sources */,
 				383F92C42BEF99D70031FCF5 /* AVCapturePhotoOutput+Rx.swift in Sources */,

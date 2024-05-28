@@ -10,5 +10,5 @@ import RxSwift
 
 protocol MainServiceRepository {
     
-    func sendImage(with request: String) -> Observable<Result<String, FaceFinder.NetworkError>>
+    func sendImage(with request: CompareRequest) -> Observable<Result<CompareResponse, FaceFinder.NetworkError>>
 }

@@ -8,8 +8,7 @@
 import Moya
 
 public enum NetworkService {
-    case sendFile(request: String)
-    
+    case sendFile(request: CompareRequest)
 }
 
 extension NetworkService: TargetType {
@@ -20,7 +19,7 @@ extension NetworkService: TargetType {
     
     public var path: String {
         switch self {
-        case .sendFile: return ""
+        case .sendFile: return "/compare"
         }
     }
     
@@ -31,7 +30,18 @@ extension NetworkService: TargetType {
     public var task: Moya.Task {
         switch self {
         case .sendFile(let request):
-            return self.requestTask(request)
+//            return self.requestTask(request)
+            let params: [String: Any] = ["image_file":request.image_file ?? nil]
+            
+            var formData = [MultipartFormData]()
+            for (key, value) in params {
+                if let imgData = value as? URL {
+                    formData.append(MultipartFormData(provider: .file(imgData), name: "image", fileName: "user_image.jpg", mimeType: "image/jpg"))
+                } else {
+                    formData.append(MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: key))
+                }
+            }
+            return .uploadMultipart(formData)
         }
     }
     
@@ -46,7 +56,7 @@ extension NetworkService: TargetType {
     }
     
     public var headers: [String : String]? {
-        var httpHeaders: [String: String] = ["Content-type" : "application/json", "AppType": "User"]
+        var httpHeaders: [String: String] = ["Content-type" : "multipart/form-data", "AppType": "User"]
         httpHeaders["User-Agent"] = ""
         return httpHeaders
     }

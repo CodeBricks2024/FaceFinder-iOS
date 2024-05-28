@@ -10,6 +10,7 @@ import RxSwift
 
 class MainService: MainServiceRepository {
     
+    
     // MARK: - Private -
     
     private let network: FFNetworking
@@ -20,11 +21,11 @@ class MainService: MainServiceRepository {
         self.disposeBag = DisposeBag()
     }
     
-    func sendImage(with request: String) -> Observable<Result<String, FaceFinder.NetworkError>> {
+    func sendImage(with request: CompareRequest) -> RxSwift.Observable<Result<CompareResponse, FaceFinder.NetworkError>> {
         return network.request(target: MultiTarget(NetworkService.sendFile(request: request)))
-            .map { try $0.mapString() }
+            .map { try $0.mapJSON() as! CompareResponse  }
             .asObservable()
-            .map(Result<String, FaceFinder.NetworkError>.success)
+            .map(Result<CompareResponse, FaceFinder.NetworkError>.success)
             .catch { error in
                 guard let error = error as? FaceFinder.NetworkError else { return .just(.failure(.ERR_DB_NO_DATA))}
                 return .just(.failure(error))

@@ -16,6 +16,6 @@ public struct Constants {
     }
     
     struct API {
-        static let BASE_URL = ""
+        static let BASE_URL = "https://http://127.0.0.1:8000"
     }
 }

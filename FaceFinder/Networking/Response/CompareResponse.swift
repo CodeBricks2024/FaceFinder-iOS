@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct CompareResponse: Codable {
+    let closest_match: String
+    let distance: Double
+}
