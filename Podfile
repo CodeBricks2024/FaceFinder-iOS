@@ -7,6 +7,11 @@ def libraries_ui
 		pod 'SnapKit'
 end
 
+def libraries_network
+  # Network
+    pod 'Moya/RxSwift', '~> 15.0'
+end
+
 def libraries_reactive
 	# Rx
 	pod 'RxSwift', '~> 6'
@@ -24,5 +29,6 @@ target 'FaceFinder' do
   # Pods for FaceFinder
   libraries_ui
 	libraries_reactive
+  libraries_network
 
 end

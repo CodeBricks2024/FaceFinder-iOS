@@ -14,4 +14,8 @@ public struct Constants {
         static let DEFAULT_STRING = ""
         static let DEFAULT_MILLISECONDS = 500
     }
+    
+    struct API {
+        static let BASE_URL = ""
+    }
 }
