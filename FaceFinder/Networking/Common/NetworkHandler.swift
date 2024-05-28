@@ -17,8 +17,6 @@ final class Networking<Target: TargetType>: MoyaProvider<Target> {
     
     init() {
         let session = MoyaProvider<Target>.defaultAlamofireSession()
-        
-        
         session.sessionConfiguration.timeoutIntervalForRequest = 20
         super.init()
     }

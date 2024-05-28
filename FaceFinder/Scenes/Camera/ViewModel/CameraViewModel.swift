@@ -68,9 +68,11 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
     // MARK: - Private -
     
     private let sceneCoordinator: SceneCoordinatorType
+    private let service: MainServiceRepository
  
-    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, service: MainServiceRepository = MainService()) {
         self.sceneCoordinator = sceneCoordinator
+        self.service = service
         
         photoData = photoInputSubject.asObservable()
     }

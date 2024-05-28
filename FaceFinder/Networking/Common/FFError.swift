@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum FFError {
+enum FaceFinder {
     
     public enum NetworkError: Error {
         
-        typealias CustomError = FFError.NetworkError
+        typealias CustomError = FaceFinder.NetworkError
         
         // MARK: - Database Error -
         case ERR_DB_NO_DATA

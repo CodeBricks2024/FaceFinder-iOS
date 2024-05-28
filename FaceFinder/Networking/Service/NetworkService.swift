@@ -18,7 +18,6 @@ extension NetworkService: TargetType {
         return URL(string: Constants.API.BASE_URL)!
     }
     
-    
     public var path: String {
         switch self {
         case .sendFile: return ""

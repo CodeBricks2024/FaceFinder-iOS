@@ -12,6 +12,8 @@
 		383A69DA2C059C3600D1514A /* Extensions+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69D92C059C3600D1514A /* Extensions+String.swift */; };
 		383A69DE2C059DBA00D1514A /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69DD2C059DBA00D1514A /* NetworkHandler.swift */; };
 		383A69E02C05A03C00D1514A /* FFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69DF2C05A03C00D1514A /* FFError.swift */; };
+		383A69E52C05A58A00D1514A /* MainServiceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69E42C05A58A00D1514A /* MainServiceRepository.swift */; };
+		383A69E82C05A62000D1514A /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A69E72C05A62000D1514A /* MainService.swift */; };
 		383F92B12BEF8A650031FCF5 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92B02BEF8A650031FCF5 /* CameraView.swift */; };
 		383F92B42BEF8B0A0031FCF5 /* CustomAVCapturePhotoOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92B32BEF8B0A0031FCF5 /* CustomAVCapturePhotoOutput.swift */; };
 		383F92B62BEF8B6A0031FCF5 /* RxAVCapturePhotoCaptureDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F92B52BEF8B6A0031FCF5 /* RxAVCapturePhotoCaptureDelegateProxy.swift */; };
@@ -75,6 +77,8 @@
 		383A69D92C059C3600D1514A /* Extensions+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+String.swift"; sourceTree = "<group>"; };
 		383A69DD2C059DBA00D1514A /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		383A69DF2C05A03C00D1514A /* FFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFError.swift; sourceTree = "<group>"; };
+		383A69E42C05A58A00D1514A /* MainServiceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainServiceRepository.swift; sourceTree = "<group>"; };
+		383A69E72C05A62000D1514A /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		383F92B02BEF8A650031FCF5 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		383F92B32BEF8B0A0031FCF5 /* CustomAVCapturePhotoOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAVCapturePhotoOutput.swift; sourceTree = "<group>"; };
 		383F92B52BEF8B6A0031FCF5 /* RxAVCapturePhotoCaptureDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxAVCapturePhotoCaptureDelegateProxy.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 		383A69D32C0599F400D1514A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				383A69E32C05A57E00D1514A /* Repository */,
 				383A69DC2C059DAD00D1514A /* Common */,
 				383A69D62C059A0C00D1514A /* Service */,
 			);
@@ -172,6 +177,22 @@
 				383A69DF2C05A03C00D1514A /* FFError.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		383A69E32C05A57E00D1514A /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				383A69E42C05A58A00D1514A /* MainServiceRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		383A69E62C05A60B00D1514A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				383A69E72C05A62000D1514A /* MainService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		383F92B22BEF8AF40031FCF5 /* RxAvfoundation */ = {
@@ -284,6 +305,7 @@
 		38915BC72BE37AC900CD1BF5 /* FaceFinder */ = {
 			isa = PBXGroup;
 			children = (
+				383A69E62C05A60B00D1514A /* Service */,
 				383A69D32C0599F400D1514A /* Networking */,
 				38C31D1B2BF0FB1500742E04 /* Assets */,
 				383F92C52BEF9CC80031FCF5 /* Model */,
@@ -664,6 +686,7 @@
 				383F92B62BEF8B6A0031FCF5 /* RxAVCapturePhotoCaptureDelegateProxy.swift in Sources */,
 				383F92B82BEF8B8D0031FCF5 /* UIView+Style.swift in Sources */,
 				383A69D52C0599FC00D1514A /* NetworkService.swift in Sources */,
+				383A69E82C05A62000D1514A /* MainService.swift in Sources */,
 				38C31D1F2BF0FB7200742E04 /* AnimationView+Style.swift in Sources */,
 				38E885A62BE38F5A00D1074B /* SplashViewController.swift in Sources */,
 				38E885902BE3860400D1074B /* TargetScene.swift in Sources */,
@@ -674,6 +697,7 @@
 				383F92BE2BEF93F60031FCF5 /* CameraFooterView.swift in Sources */,
 				38E885A02BE38E4900D1074B /* BaseViewController.swift in Sources */,
 				38E885972BE3878000D1074B /* Extensions+ObservableType.swift in Sources */,
+				383A69E52C05A58A00D1514A /* MainServiceRepository.swift in Sources */,
 				389C7CA02BF2F2420030790F /* ResultViewModel.swift in Sources */,
 				383F92B42BEF8B0A0031FCF5 /* CustomAVCapturePhotoOutput.swift in Sources */,
 				38A802D82BEBB5B20068ABA0 /* Extensions+AppString.swift in Sources */,
