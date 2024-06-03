@@ -32,17 +32,16 @@ extension NetworkService: TargetType {
     public var task: Moya.Task {
         switch self {
         case .sendFile(let request):
-            let params: [String: Any] = ["image_file": request.image_file ?? nil]
-            print("params check: \(params)")
+            let params: [String: Any] = ["image_file": request.image_file]
             var formData = [MultipartFormData]()
             for (key, value) in params {
-                print("keyval: \(key), \(value)")
                 if let imgData = value as? URL {
                     formData.append(MultipartFormData(provider: .file(imgData), name: "image", fileName: "user_image.jpg", mimeType: "image/jpg"))
                     print("formdata1: \(formData)")
+                } else if let imgData = request.image_file {
+                    formData.append(MultipartFormData(provider: .data(imgData), name: "\(key)", fileName: "user_image.jpg", mimeType: "image/jpg"))
                 } else {
-                    formData.append(MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: key))
-                    print("formdata2: \(formData)")
+                    formData.append(MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: "\(key).jpg", fileName: "user_image.jpg", mimeType: "image/jpg"))
                 }
             }
             return .uploadMultipart(formData)
