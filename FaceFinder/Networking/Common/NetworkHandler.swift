@@ -36,8 +36,8 @@ final class Networking<Target: TargetType>: MoyaProvider<Target> {
                 
                 if let response = (error as? MoyaError)?.response {
                     if let jsonObject = try? response.mapJSON(failsOnEmptyData: false) {
-                        let messsage = "[FAILURE]: \(requestString), \(response.statusCode), \(jsonObject)"
-                        debugPrint("[MoyaError]: \(message)")
+                        let failureMesssage = "[FAILURE]: \(requestString), \(response.statusCode), \(jsonObject)"
+                        debugPrint("[MoyaError]: \(message)\n\(failureMesssage)")
                     } else if let rawString = String(data: response.data, encoding: .utf8) {
                         let message = "[FAILURE]: \(requestString), \(response.statusCode), \(rawString)"
                         debugPrint(message)

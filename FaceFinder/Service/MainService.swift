@@ -23,7 +23,7 @@ class MainService: MainServiceRepository {
     
     func sendImage(with request: CompareRequest) -> RxSwift.Observable<Result<CompareResponse, FaceFinder.NetworkError>> {
         return network.request(target: MultiTarget(NetworkService.sendFile(request: request)))
-            .map { try $0.mapJSON() as! CompareResponse  }
+            .map { try $0.map(CompareResponse.self)  }
             .asObservable()
             .map(Result<CompareResponse, FaceFinder.NetworkError>.success)
             .catch { error in

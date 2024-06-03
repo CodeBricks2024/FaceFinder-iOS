@@ -7,6 +7,6 @@
 
 import Foundation
 
-public struct CompareRequest: Codable {
+public struct CompareRequest: Encodable {
     var image_file: Data?
 }
