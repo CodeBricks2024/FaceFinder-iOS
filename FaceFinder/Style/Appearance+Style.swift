@@ -25,6 +25,7 @@ extension Appearance {
         static let defaultHeight: CGFloat = 56.0
         static let headerHeight: CGFloat = 50.0
         static let iconSize: CGFloat = 30.0
+        static let imageSize: CGFloat = 255.0
     }
     
     enum Icon {
@@ -45,4 +46,5 @@ extension Appearance {
         static let mediumSize: CGFloat = 24.0
         static let regularSize: CGFloat = 16.0
     }
+    
 }

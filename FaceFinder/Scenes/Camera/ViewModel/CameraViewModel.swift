@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Action
+import Toaster
 
 protocol CameraViewModelInput: BaseViewModelInput {
     var backAction: CocoaAction { get }
@@ -53,8 +54,37 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
     
     lazy var moveAction: Action<UIImage, Void> = {
         return Action<UIImage, Void> { [unowned self] input in
-            let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, photo: input)
-            return self.sceneCoordinator.transition(to: Scene.result(vm))
+            
+//            var request = TestRequest()
+//            request.id = 3
+//            
+//            return self.service.sendTest(with: request)
+//                .flatMap { result -> Observable<Void> in
+//                    switch result {
+//                    case let .success(response):
+//                        print("test success: \(response)")
+//                        return .just(())
+//                    case let .failure(error):
+//                        print("test failure: \(error.localizedDescription)")
+//                        return .just(())
+//                    }
+//                }
+            let imageData = input.resizeImage().jpegData(compressionQuality: 0.8)
+            print("img url: \(imageData)")
+            var request = CompareRequest()
+            request.image_file = imageData
+            return self.service.sendImage(with: request)
+                .flatMap { result -> Observable<Void> in
+                    switch result {
+                    case let .success(response):
+                        let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, photo: input)
+                        return self.sceneCoordinator.transition(to: Scene.result(vm))
+                    case let .failure(error):
+                        let errorMessage = error.localizedDescription
+                        Toast(text: errorMessage).show()
+                        return .empty()
+                    }
+                }
         }
     }()
     
@@ -68,9 +98,11 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
     // MARK: - Private -
     
     private let sceneCoordinator: SceneCoordinatorType
+    private let service: MainServiceRepository
  
-    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, service: MainServiceRepository = MainService()) {
         self.sceneCoordinator = sceneCoordinator
+        self.service = service
         
         photoData = photoInputSubject.asObservable()
     }

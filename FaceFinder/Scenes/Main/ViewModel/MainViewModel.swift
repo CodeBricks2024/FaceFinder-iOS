@@ -43,8 +43,10 @@ class MainViewModel: MainViewModelInput, MainViewModelOutput, MainViewModelType 
     // MARK: - Private -
     
     private let sceneCoordinator: SceneCoordinatorType
- 
-    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+    private let service: MainServiceRepository
+    
+    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, service: MainServiceRepository = MainService()) {
         self.sceneCoordinator = sceneCoordinator
+        self.service = service
     }
 }
