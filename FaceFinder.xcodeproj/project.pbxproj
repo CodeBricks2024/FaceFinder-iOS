@@ -51,6 +51,8 @@
 		38C734A12BF918B400F49197 /* centerLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 38C734A02BF918B400F49197 /* centerLoading.json */; };
 		38DB07062C05DD210079D06C /* CompareRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB07052C05DD210079D06C /* CompareRequest.swift */; };
 		38DB07092C05DDBF0079D06C /* CompareResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB07082C05DDBF0079D06C /* CompareResponse.swift */; };
+		38DB070B2C05FC4F0079D06C /* TestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB070A2C05FC4F0079D06C /* TestRequest.swift */; };
+		38DB070D2C05FC7F0079D06C /* TestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB070C2C05FC7F0079D06C /* TestResponse.swift */; };
 		38E8858E2BE385E400D1074B /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8858D2BE385E400D1074B /* SceneCoordinatorType.swift */; };
 		38E885902BE3860400D1074B /* TargetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8858F2BE3860400D1074B /* TargetScene.swift */; };
 		38E885922BE3861500D1074B /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E885912BE3861500D1074B /* SceneTransitionType.swift */; };
@@ -120,6 +122,8 @@
 		38C734A02BF918B400F49197 /* centerLoading.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = centerLoading.json; sourceTree = "<group>"; };
 		38DB07052C05DD210079D06C /* CompareRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareRequest.swift; sourceTree = "<group>"; };
 		38DB07082C05DDBF0079D06C /* CompareResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareResponse.swift; sourceTree = "<group>"; };
+		38DB070A2C05FC4F0079D06C /* TestRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRequest.swift; sourceTree = "<group>"; };
+		38DB070C2C05FC7F0079D06C /* TestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResponse.swift; sourceTree = "<group>"; };
 		38E8858D2BE385E400D1074B /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		38E8858F2BE3860400D1074B /* TargetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetScene.swift; sourceTree = "<group>"; };
 		38E885912BE3861500D1074B /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				38DB07052C05DD210079D06C /* CompareRequest.swift */,
+				38DB070A2C05FC4F0079D06C /* TestRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				38DB07082C05DDBF0079D06C /* CompareResponse.swift */,
+				38DB070C2C05FC7F0079D06C /* TestResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -691,6 +697,7 @@
 				383F92BC2BEF92B20031FCF5 /* CameraViewController.swift in Sources */,
 				38E885B92BE3913C00D1074B /* AVCaptureMetadataOutput+Rx.swift in Sources */,
 				389D28E62BF587BB00F9D654 /* NavigationView.swift in Sources */,
+				38DB070B2C05FC4F0079D06C /* TestRequest.swift in Sources */,
 				38E885A32BE38E9000D1074B /* BaseViewModel.swift in Sources */,
 				383F92CA2BEF9EA20031FCF5 /* Constants.swift in Sources */,
 				389C7C9E2BF2F2250030790F /* ResultViewController.swift in Sources */,
@@ -699,6 +706,7 @@
 				383A69DA2C059C3600D1514A /* Extensions+String.swift in Sources */,
 				383F92BA2BEF8C650031FCF5 /* Appearance+Style.swift in Sources */,
 				38E885AE2BE3902600D1074B /* Extensions+UIFont.swift in Sources */,
+				38DB070D2C05FC7F0079D06C /* TestResponse.swift in Sources */,
 				38A802D12BEBAE480068ABA0 /* PreviewView.swift in Sources */,
 				389D28E82BF5882900F9D654 /* UILabel+Style.swift in Sources */,
 				38E885A92BE38F7400D1074B /* ViewModelBindableType.swift in Sources */,

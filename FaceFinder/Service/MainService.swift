@@ -31,4 +31,16 @@ class MainService: MainServiceRepository {
                 return .just(.failure(error))
             }
     }
+    
+    
+    func sendTest(with request: TestRequest) -> Observable<Result<TestResponse, FaceFinder.NetworkError>> {
+        return network.request(target: MultiTarget(NetworkService.sendTest(request: request)))
+            .map { try $0.map(TestResponse.self)  }
+            .asObservable()
+            .map(Result<TestResponse, FaceFinder.NetworkError>.success)
+            .catch { error in
+                guard let error = error as? FaceFinder.NetworkError else { return .just(.failure(.ERR_DB_NO_DATA))}
+                return .just(.failure(error))
+            }
+    }
 }
