@@ -5,6 +5,7 @@ def libraries_ui
  # UI
     pod 'Toaster'
 		pod 'SnapKit'
+    pod 'SDWebImage', '~> 5.12.1'
 end
 
 def libraries_network
@@ -19,7 +20,7 @@ def libraries_reactive
   pod 'RxGesture'
   pod 'Action', '~> 5.0'
   pod 'lottie-ios'
-
+	pod 'RxDataSources', '~> 5.0'
 end
 
 target 'FaceFinder' do

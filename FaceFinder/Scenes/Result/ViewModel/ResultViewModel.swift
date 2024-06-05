@@ -15,6 +15,8 @@ protocol ResultViewModelInput {
 
 protocol ResultViewModelOutput {
     var originalPhotoImage: Observable<UIImage> { get }
+    /// 컬렉션 뷰에 표시할 thumbnail 이미지 데이터
+    var thumbnailPhotoData: Observable<[UIImage]> { get }
 }
 
 protocol ResultViewModelType {
@@ -35,8 +37,10 @@ class ResultViewModel: ResultViewModelInput, ResultViewModelOutput, ResultViewMo
         }
     }()
     
-    // MARK: - Output -
     
+    // MARK: - Output
+  
+    var thumbnailPhotoData = Observable<[UIImage]>.just([])
     var originalPhotoImage: Observable<UIImage>
     
     // MARK: - Private -
