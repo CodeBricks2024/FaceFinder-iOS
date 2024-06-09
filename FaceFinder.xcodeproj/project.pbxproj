@@ -55,6 +55,7 @@
 		38DB07092C05DDBF0079D06C /* CompareResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB07082C05DDBF0079D06C /* CompareResponse.swift */; };
 		38DB070B2C05FC4F0079D06C /* TestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB070A2C05FC4F0079D06C /* TestRequest.swift */; };
 		38DB070D2C05FC7F0079D06C /* TestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DB070C2C05FC7F0079D06C /* TestResponse.swift */; };
+		38DFDC322C11DF2A00AF5D56 /* ComparedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFDC312C11DF2900AF5D56 /* ComparedData.swift */; };
 		38E8858E2BE385E400D1074B /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8858D2BE385E400D1074B /* SceneCoordinatorType.swift */; };
 		38E885902BE3860400D1074B /* TargetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8858F2BE3860400D1074B /* TargetScene.swift */; };
 		38E885922BE3861500D1074B /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E885912BE3861500D1074B /* SceneTransitionType.swift */; };
@@ -133,6 +134,7 @@
 		38DB07082C05DDBF0079D06C /* CompareResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareResponse.swift; sourceTree = "<group>"; };
 		38DB070A2C05FC4F0079D06C /* TestRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRequest.swift; sourceTree = "<group>"; };
 		38DB070C2C05FC7F0079D06C /* TestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResponse.swift; sourceTree = "<group>"; };
+		38DFDC312C11DF2900AF5D56 /* ComparedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparedData.swift; sourceTree = "<group>"; };
 		38E8858D2BE385E400D1074B /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		38E8858F2BE3860400D1074B /* TargetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetScene.swift; sourceTree = "<group>"; };
 		38E885912BE3861500D1074B /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				383F92C62BEF9CCD0031FCF5 /* Camera */,
+				38DFDC312C11DF2900AF5D56 /* ComparedData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				38E885B92BE3913C00D1074B /* AVCaptureMetadataOutput+Rx.swift in Sources */,
 				389D28E62BF587BB00F9D654 /* NavigationView.swift in Sources */,
 				38DB070B2C05FC4F0079D06C /* TestRequest.swift in Sources */,
+				38DFDC322C11DF2A00AF5D56 /* ComparedData.swift in Sources */,
 				38F7F5B22C0FFFE800A708EC /* ImageCardCell.swift in Sources */,
 				38E885A32BE38E9000D1074B /* BaseViewModel.swift in Sources */,
 				383F92CA2BEF9EA20031FCF5 /* Constants.swift in Sources */,

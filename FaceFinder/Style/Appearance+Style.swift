@@ -40,6 +40,7 @@ extension Appearance {
         static let overlay = UIImage(named: "overlay")
         static let shutter = UIImage(named: "shutter")
         static let sampleImg = UIImage(named: "sample")
+        static let placeholder = UIImage(named: "sample")
     }
     
     enum Font {

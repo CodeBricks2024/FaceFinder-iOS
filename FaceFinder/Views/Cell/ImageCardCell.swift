@@ -46,6 +46,7 @@ class ImageCardCell: ImagesCell {
     }
     
     override func prepareForReuse() {
+        self.layer.cornerRadius = Appearance.Layer.defaultRadius
         self.disposeBag = DisposeBag()
     }
 }

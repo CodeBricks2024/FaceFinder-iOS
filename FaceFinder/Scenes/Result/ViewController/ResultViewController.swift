@@ -72,9 +72,10 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
         }
         
         imageCollectionView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
+            make.top.equalTo(originalImgview.snp.bottom).offset(UI.imgViewVerticalMargin)
             make.leading.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-(UI.imgViewLeadingTrailingMargin))
+            make.trailing.equalToSuperview()
+            make.height.equalTo(UI.imgWidth/2)
         }
         
         configureCollectionView()
@@ -88,10 +89,12 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
 //        let width = floor((UIScreen.main.bounds.width - 24 - 24 - (cellPadding * (cellsPerRow - 1))) / 4)
 //        let height = floor(width / imageRatio)
 //
-//        flowLayout.minimumLineSpacing = 8
+        flowLayout.minimumLineSpacing = 8
 //        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.itemSize = CGSize(width: UI.contentsViewHeight, height: UI.contentsViewHeight)
+        flowLayout.itemSize = CGSize(width: UI.contentsViewHeight, height: UI.contentsViewHeight * 1.2)
 //        flowLayout.sectionInset = UIEdgeInsets(top: 24.0, left: 24.0, bottom: 24.0, right: 24.0)
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.invalidateLayout()
     }
 
     // MARK: - Bind
@@ -109,6 +112,7 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
             .observe(on: MainScheduler.instance)
             .bind(to: imageCollectionView.rx.items) { cv, index, element in
                 let cell = cv.dequeueReusableCell(withCellType: ImageCardCell.self, forIndexPath: IndexPath(row: index, section: 0))
+                cell.layer.cornerRadius = Appearance.Layer.defaultRadius
                 cell.thumbnailImage = element
                 return cell
             }

@@ -47,8 +47,20 @@ class ResultViewModel: ResultViewModelInput, ResultViewModelOutput, ResultViewMo
     
     private let sceneCoordinator: SceneCoordinatorType
     
-    init(sceneCoordinator: SceneCoordinatorType, photo: UIImage) {
+    // TODO: - DELETE LATER -
+    private var dummyPhotos: [UIImage] = [
+        Appearance.Image.sampleImg!,
+        Appearance.Image.sampleImg!,
+        Appearance.Image.sampleImg!,
+        Appearance.Image.sampleImg!,
+        Appearance.Image.sampleImg!
+    ]
+    
+    init(sceneCoordinator: SceneCoordinatorType, data: ComparedData) {
         self.sceneCoordinator = sceneCoordinator
-        self.originalPhotoImage = .just(photo)
+        self.originalPhotoImage = .just(data.original_image ?? Appearance.Image.placeholder!)
+//        self.thumbnailPhotoData = .just(data.compared_images)
+        self.thumbnailPhotoData = .just(dummyPhotos)
+        
     }
 }
