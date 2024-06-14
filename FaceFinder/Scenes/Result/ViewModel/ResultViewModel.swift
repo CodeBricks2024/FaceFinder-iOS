@@ -17,6 +17,9 @@ protocol ResultViewModelOutput {
     var originalPhotoImage: Observable<UIImage> { get }
     /// 컬렉션 뷰에 표시할 thumbnail 이미지 데이터
     var thumbnailPhotoData: Observable<[UIImage]> { get }
+    var closestMatchName: Observable<String> { get }
+    var emotionName: Observable<String> { get }
+    var emoji: Observable<String> { get }
 }
 
 protocol ResultViewModelType {
@@ -42,6 +45,9 @@ class ResultViewModel: ResultViewModelInput, ResultViewModelOutput, ResultViewMo
   
     var thumbnailPhotoData = Observable<[UIImage]>.just([])
     var originalPhotoImage: Observable<UIImage>
+    var closestMatchName: Observable<String>
+    var emotionName: Observable<String>
+    var emoji: Observable<String>
     
     // MARK: - Private -
     
@@ -56,11 +62,13 @@ class ResultViewModel: ResultViewModelInput, ResultViewModelOutput, ResultViewMo
         Appearance.Image.sampleImg!
     ]
     
-    init(sceneCoordinator: SceneCoordinatorType, data: ComparedData) {
+    init(sceneCoordinator: SceneCoordinatorType, data: ComparedData, response: CompareResponse) {
         self.sceneCoordinator = sceneCoordinator
         self.originalPhotoImage = .just(data.original_image ?? Appearance.Image.placeholder!)
 //        self.thumbnailPhotoData = .just(data.compared_images)
         self.thumbnailPhotoData = .just(dummyPhotos)
-        
+        self.closestMatchName = .just(response.closest_match)
+        self.emotionName = .just(response.emotion)
+        self.emoji = .just(response.emotion.toEmoji())
     }
 }

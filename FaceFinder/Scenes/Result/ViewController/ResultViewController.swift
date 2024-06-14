@@ -36,6 +36,9 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
         cv.register(cellType: ImageCardCell.self)
         return cv
     }()
+    lazy var nameLabel = UILabel.headerBoldLabel
+    lazy var emotionLabel = UILabel.headerBoldLabel
+    lazy var emojiLabel = UILabel.emojiLabel
     
     // MARK: - Private
     
@@ -56,7 +59,8 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     
     override func setupUI() {
         navView.titleLabel.text = .resultTitle
-        [navView, originalImgview, imageCollectionView].forEach(view.addSubview(_:))
+        nameLabel.textColor = UIColor.primaryColor
+        [navView, originalImgview, nameLabel, imageCollectionView, emotionLabel, emojiLabel].forEach(view.addSubview(_:))
         
         navView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin)
@@ -71,11 +75,29 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
             make.width.height.equalTo(UI.imgWidth)
         }
         
-        imageCollectionView.snp.makeConstraints { make in
+        nameLabel.snp.makeConstraints { make in
             make.top.equalTo(originalImgview.snp.bottom).offset(UI.imgViewVerticalMargin)
+            make.leading.equalTo(originalImgview.snp.leading)
+            make.trailing.equalTo(originalImgview.snp.trailing)
+        }
+        
+        imageCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(UI.imgWidth/2)
+        }
+        
+        emotionLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageCollectionView.snp.bottom)
+            make.centerX.equalTo(view.snp.centerX)
+            make.width.equalTo(originalImgview.snp.width)
+        }
+        
+        emojiLabel.snp.makeConstraints { make in
+            make.top.equalTo(emotionLabel.snp.bottom)
+            make.centerX.equalTo(view.snp.centerX)
+            make.width.height.equalTo(UI.imgWidth/2)
         }
         
         configureCollectionView()
@@ -118,7 +140,24 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
             }
             .disposed(by: disposeBag)
         
+        output.closestMatchName
+            .observe(on: MainScheduler.instance)
+            .bind(to: nameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.emotionName
+            .observe(on: MainScheduler.instance)
+            .bind(to: emotionLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.emoji
+            .observe(on: MainScheduler.instance)
+            .bind(to: emojiLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         navView.backButton.rx.action = input.backAction
         
     }
 }
+
+

@@ -65,7 +65,7 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
                     switch result {
                     case let .success(response):
                         print("res: \(response)")
-                        let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, data: input)
+                        let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, data: input, response: response)
                         return self.sceneCoordinator.transition(to: Scene.result(vm))
                     case let .failure(error):
                         let errorMessage = error.localizedDescription

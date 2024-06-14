@@ -34,9 +34,6 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     let animationView = AnimationView.mainAnimationView
     let centerAnimationView = AnimationView.mainCenterAnimationView
     
-    // TODO: DELETE LATER
-    lazy var resultButton = UIButton.bottomButton
-    
     // MARK: - Private -
     
     private let disposeBag = DisposeBag()
@@ -55,7 +52,7 @@ class MainViewController: BaseViewController, ViewModelBindableType {
     override func setupUI() {
         scanButton.setTitle(.scan, for: .normal)
         
-        [headerView, animationView, scanButton, resultButton].forEach(view.addSubview(_:))
+        [headerView, animationView, scanButton].forEach(view.addSubview(_:))
         animationView.addSubview(centerAnimationView)
         
         headerView.snp.makeConstraints { make in
@@ -81,13 +78,6 @@ class MainViewController: BaseViewController, ViewModelBindableType {
             make.trailing.equalToSuperview().offset(-(UI.leadingTrailingMargin))
             make.height.equalTo(UI.buttonHeight)
             make.bottom.equalTo(view.snp.bottomMargin)
-        }
-        
-        resultButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(UI.leadingTrailingMargin)
-            make.trailing.equalToSuperview().offset(-(UI.leadingTrailingMargin))
-            make.height.equalTo(UI.buttonHeight)
-            make.bottom.equalTo(scanButton.snp.topMargin).offset(-(UI.leadingTrailingMargin))
         }
         
         animationView.rx.tapGesture()

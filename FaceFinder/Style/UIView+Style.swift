@@ -89,4 +89,11 @@ extension UIImageView {
         view.image = Appearance.Image.sampleImg
         return view
     }
+    
+    static var plainImgView: UIImageView {
+        let view = UIImageView()
+        view.layer.masksToBounds = true
+        view.contentMode = .scaleAspectFill
+        return view
+    }
 }

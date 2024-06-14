@@ -10,7 +10,7 @@ import UIKit
 enum Appearance {}
 
 extension Appearance {
- 
+    
     enum Layer {
         static let defaultRadius: CGFloat = 10.0
     }
@@ -44,8 +44,19 @@ extension Appearance {
     }
     
     enum Font {
+        static let mediumLargeSize: CGFloat = 36.0
         static let mediumSize: CGFloat = 24.0
         static let regularSize: CGFloat = 16.0
+        static let emojiLargeSize: CGFloat = 100.0
     }
     
+    enum Emoji {
+        static let happy = "\u{1F601}"
+        static let neutral = "\u{1F610}"
+        static let fear = "\u{1F628}"
+        static let disgust = "\u{1F616}"
+        static let angry = "\u{1F620}"
+        static let sad = "\u{1F622}"
+        static let surprise = "\u{1F632}"
+    }
 }
