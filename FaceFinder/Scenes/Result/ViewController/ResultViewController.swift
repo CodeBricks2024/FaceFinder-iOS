@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxDataSources
+import StoreKit
 
 class ResultViewController: BaseViewController, ViewModelBindableType {
     
@@ -53,6 +54,20 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 14.0, *) {
+          guard let scene = UIApplication
+            .shared
+            .connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+          else { return }
+          SKStoreReviewController.requestReview(in: scene)
+        } else {
+          SKStoreReviewController.requestReview()
+        }
     }
     
     // MARK: - Set Up UI
