@@ -92,7 +92,7 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
         flowLayout.minimumLineSpacing = 8
 //        flowLayout.minimumInteritemSpacing = 0
         flowLayout.itemSize = CGSize(width: UI.contentsViewHeight, height: UI.contentsViewHeight * 1.2)
-//        flowLayout.sectionInset = UIEdgeInsets(top: 24.0, left: 24.0, bottom: 24.0, right: 24.0)
+        flowLayout.sectionInset = UIEdgeInsets(top: 0.0, left: UI.imgViewVerticalMargin, bottom: 0.0, right: UI.imgViewVerticalMargin)
         flowLayout.scrollDirection = .horizontal
         flowLayout.invalidateLayout()
     }
@@ -112,7 +112,7 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
             .observe(on: MainScheduler.instance)
             .bind(to: imageCollectionView.rx.items) { cv, index, element in
                 let cell = cv.dequeueReusableCell(withCellType: ImageCardCell.self, forIndexPath: IndexPath(row: index, section: 0))
-                cell.layer.cornerRadius = Appearance.Layer.defaultRadius
+                cell.bg.layer.cornerRadius = Appearance.Layer.defaultRadius
                 cell.thumbnailImage = element
                 return cell
             }
