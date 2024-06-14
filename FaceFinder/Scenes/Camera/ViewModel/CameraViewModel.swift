@@ -54,43 +54,25 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
     
     lazy var moveAction: Action<ComparedData, Void> = {
         return Action<ComparedData, Void> { [unowned self] input in
-            
-            //            var request = TestRequest()
-            //            request.id = 3
-            //
-            //            return self.service.sendTest(with: request)
-            //                .flatMap { result -> Observable<Void> in
-            //                    switch result {
-            //                    case let .success(response):
-            //                        print("test success: \(response)")
-            //                        return .just(())
-            //                    case let .failure(error):
-            //                        print("test failure: \(error.localizedDescription)")
-            //                        return .just(())
-            //                    }
-            //                }
             guard let originalImg = input.original_image else { return Observable.just(()) }
             
             let imageData = originalImg.resizeImage().jpegData(compressionQuality: 0.8)
-            print("img url: \(imageData)")
             var request = CompareRequest()
             request.image_file = imageData
             
-            // TODO: - Delete Later-
-            let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, data: input)
-            return self.sceneCoordinator.transition(to: Scene.result(vm))
-//            return self.service.sendImage(with: request)
-//                .flatMap { result -> Observable<Void> in
-//                    switch result {
-//                    case let .success(response):
-//                        let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, photo: input)
-//                        return self.sceneCoordinator.transition(to: Scene.result(vm))
-//                    case let .failure(error):`
-//                        let errorMessage = error.localizedDescription
-//                        Toast(text: errorMessage).show()
-//                        return .empty()
-//                    }
-//                }
+            return self.service.sendImage(with: request)
+                .flatMap { result -> Observable<Void> in
+                    switch result {
+                    case let .success(response):
+                        print("res: \(response)")
+                        let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, data: input)
+                        return self.sceneCoordinator.transition(to: Scene.result(vm))
+                    case let .failure(error):
+                        let errorMessage = error.localizedDescription
+                        Toast(text: errorMessage).show()
+                        return .empty()
+                    }
+                }
         }
     }()
     
