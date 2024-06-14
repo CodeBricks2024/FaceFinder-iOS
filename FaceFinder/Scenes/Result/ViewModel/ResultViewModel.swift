@@ -53,20 +53,13 @@ class ResultViewModel: ResultViewModelInput, ResultViewModelOutput, ResultViewMo
     
     private let sceneCoordinator: SceneCoordinatorType
     
-    // TODO: - DELETE LATER -
-    private var dummyPhotos: [UIImage] = [
-        Appearance.Image.sampleImg!,
-        Appearance.Image.sampleImg!,
-        Appearance.Image.sampleImg!,
-        Appearance.Image.sampleImg!,
-        Appearance.Image.sampleImg!
-    ]
-    
     init(sceneCoordinator: SceneCoordinatorType, data: ComparedData, response: CompareResponse) {
+        print("distances check: \(response.distances.map { $0.name} )")
         self.sceneCoordinator = sceneCoordinator
         self.originalPhotoImage = .just(data.original_image ?? Appearance.Image.placeholder!)
-//        self.thumbnailPhotoData = .just(data.compared_images)
-        self.thumbnailPhotoData = .just(dummyPhotos)
+        self.thumbnailPhotoData = .just(response.distances.map { UIImage(base64: $0.image, withPrefix: false) ?? Appearance.Image.placeholder! })
+        
+        
         self.closestMatchName = .just(response.closest_match)
         self.emotionName = .just(response.emotion)
         self.emoji = .just(response.emotion.toEmoji())

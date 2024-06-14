@@ -18,7 +18,6 @@ class ImageCardCell: ImagesCell {
     
     // MARK: - UI Properties
     
-//    lazy var closeButton = UIButton.roundCancelButton
     
     override var thumbnailImage: UIImage? {
         didSet {
@@ -32,6 +31,7 @@ class ImageCardCell: ImagesCell {
     
     // MARK: - Properties
     
+    var matchInfo: Match?
     var disposeBag = DisposeBag()
     
     // MARK: - Init

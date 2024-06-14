@@ -28,7 +28,6 @@ extension String {
     }
     
     func toEmoji() -> String {
-        print("emoji self: \(self)")
         switch self {
             case "happy":
                 return Appearance.Emoji.happy
