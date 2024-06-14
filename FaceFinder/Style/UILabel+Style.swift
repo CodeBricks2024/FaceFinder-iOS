@@ -11,8 +11,17 @@ extension UILabel {
     
     static var headerBoldLabel: UILabel {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: Appearance.Font.regularSize)
+        label.font = .boldSystemFont(ofSize: Appearance.Font.mediumSize)
         label.numberOfLines = 0
+        label.textAlignment = .center
+        return label
+    }
+    
+    static var emojiLabel: UILabel {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: Appearance.Font.emojiLargeSize)
         return label
     }
 }

@@ -11,6 +11,8 @@ import RxCocoa
 import Photos
 import AVFoundation
 import PhotosUI
+import NVActivityIndicatorView
+import SnapKit
 
 class CameraViewController: BaseViewController, ViewModelBindableType {
     
@@ -39,6 +41,23 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         return view
     }()
     
+    // lazy: 사용되기 전까지 연산되지 않는다. 로딩이 불필요한 경우에도 메모리를 잡아먹지 않는다.
+    lazy var loadingBgView: UIView = {
+        let bgView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        bgView.backgroundColor = .black.withAlphaComponent(0.5)
+        
+        return bgView
+    }()
+    
+    lazy var activityIndicator: NVActivityIndicatorView = {
+        let activityIndicator = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: UI.backButtonSize, height: UI.backButtonSize),
+                                                        type: .lineSpinFadeLoader,
+                                                        color: .white,
+                                                        padding: .zero)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        return activityIndicator
+    }()
     
     // MARK: - PHObject Properties
     
@@ -96,6 +115,32 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         footerView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(cameraView)
             make.bottom.equalTo(view.snp.bottomMargin)
+        }
+    }
+    
+    // MARK: - Set Up IndicatorView
+    
+    private func setActivityIndicator() {
+        // 불투명 뷰 추가
+        view.addSubview(loadingBgView)
+        // activity indicator 추가
+        loadingBgView.addSubview(activityIndicator)
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalTo(view.snp.centerX)
+            make.centerY.equalTo(view.snp.centerY)
+        }
+        
+        // 애니메이션 시작
+        activityIndicator.startAnimating()
+    }
+    
+    private func removeActivityIndicator() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // 애니메이션 정지.
+            // 서버 통신 완료 후 다음의 메서드를 실행해서 통신의 끝나는 느낌을 줄 수 있다.
+            self.activityIndicator.stopAnimating()
+            self.loadingBgView.removeFromSuperview()
         }
     }
     
@@ -263,8 +308,19 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         
         output.photoData
             .observe(on: MainScheduler.instance)
+            .do { [unowned self] _ in
+                self.setActivityIndicator()
+            }
             .unwrap()
             .bind(to: input.moveAction.inputs)
+            .disposed(by: disposeBag)
+        
+        output.requestDone
+            .observe(on: MainScheduler.instance)
+            .map { $0 }
+            .subscribe(onNext: { [unowned self] _ in
+                self.removeActivityIndicator()
+            })
             .disposed(by: disposeBag)
         
         backButton.rx.action = input.backAction

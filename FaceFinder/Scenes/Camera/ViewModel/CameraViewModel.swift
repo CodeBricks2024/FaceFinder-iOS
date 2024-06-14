@@ -14,7 +14,7 @@ import Toaster
 protocol CameraViewModelInput: BaseViewModelInput {
     var backAction: CocoaAction { get }
     var dismissAction: CocoaAction { get }
-    var moveAction: Action<UIImage, Void> { get }
+    var moveAction: Action<ComparedData, Void> { get }
     /// AVCapturePhotoOutput을 통하여 변환된 이미지를 전달
     var photoInputSubject: PublishSubject<UIImage?> { get }
     /// Capture된 Photo의 fileName과 file 경로를 CapturedPhotoData 객체화하여 전달
@@ -24,7 +24,9 @@ protocol CameraViewModelInput: BaseViewModelInput {
 
 protocol CameraViewModelOutput: BaseViewModelOutput {
     /// AVCapturePhotoOutput을 통해 변환된 이미지 전달
-    var photoData: Observable<UIImage?> { get }
+    var photoData: Observable<ComparedData?> { get }
+    /// API 리퀘스트에 대한 결과 받았을 때, 인디케이터 뷰 스탑해주기 위한 플래그
+    var requestDone: PublishSubject<Bool> { get }
 }
 
 protocol CameraViewModelType {
@@ -52,32 +54,21 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
         }
     }()
     
-    lazy var moveAction: Action<UIImage, Void> = {
-        return Action<UIImage, Void> { [unowned self] input in
+    lazy var moveAction: Action<ComparedData, Void> = {
+        return Action<ComparedData, Void> { [unowned self] input in
+            guard let originalImg = input.original_image else { return Observable.just(()) }
             
-//            var request = TestRequest()
-//            request.id = 3
-//            
-//            return self.service.sendTest(with: request)
-//                .flatMap { result -> Observable<Void> in
-//                    switch result {
-//                    case let .success(response):
-//                        print("test success: \(response)")
-//                        return .just(())
-//                    case let .failure(error):
-//                        print("test failure: \(error.localizedDescription)")
-//                        return .just(())
-//                    }
-//                }
-            let imageData = input.resizeImage().jpegData(compressionQuality: 0.8)
-            print("img url: \(imageData)")
+            let imageData = originalImg.resizeImage().jpegData(compressionQuality: 0.8)
             var request = CompareRequest()
             request.image_file = imageData
+            
             return self.service.sendImage(with: request)
                 .flatMap { result -> Observable<Void> in
+                    self.requestDone.onNext(true)
                     switch result {
                     case let .success(response):
-                        let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, photo: input)
+                        print("res: \(response)")
+                        let vm = ResultViewModel(sceneCoordinator: self.sceneCoordinator, data: input, response: response)
                         return self.sceneCoordinator.transition(to: Scene.result(vm))
                     case let .failure(error):
                         let errorMessage = error.localizedDescription
@@ -93,17 +84,26 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
  
     // MARK: - Output -
  
-    var photoData = Observable<UIImage?>.just(nil)
+    var photoData = Observable<ComparedData?>.just(nil)
+    var requestDone = PublishSubject<Bool>()
     
     // MARK: - Private -
     
     private let sceneCoordinator: SceneCoordinatorType
     private let service: MainServiceRepository
- 
+    private var photoDataArr: [UIImage] = []
+    
     init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, service: MainServiceRepository = MainService()) {
         self.sceneCoordinator = sceneCoordinator
         self.service = service
         
-        photoData = photoInputSubject.asObservable()
+        requestDone.onNext(false)
+        
+        photoData = photoInputSubject.asObservable().unwrap()
+            .flatMap { photo -> Observable<ComparedData?> in
+                var data = ComparedData()
+                data.original_image = photo
+                return .just(data)
+            }
     }
 }

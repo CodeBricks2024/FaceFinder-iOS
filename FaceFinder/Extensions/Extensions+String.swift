@@ -14,7 +14,7 @@ extension String {
             do {
                 return try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject] } catch let error as NSError {
                     print(error)
-            }
+                }
         }
         return nil
     }
@@ -27,5 +27,24 @@ extension String {
         return NumberFormatter().number(from: self)?.intValue
     }
     
-    
+    func toEmoji() -> String {
+        switch self {
+            case "happy":
+                return Appearance.Emoji.happy
+            case "neutral":
+                return Appearance.Emoji.neutral
+            case "fear":
+                return Appearance.Emoji.fear
+            case "disgust":
+                return Appearance.Emoji.disgust
+            case "angry":
+                return Appearance.Emoji.angry
+            case "sad":
+                return Appearance.Emoji.sad
+            case "surprise":
+                return Appearance.Emoji.surprise
+            default:
+                return Appearance.Emoji.neutral
+        }
+    }
 }
