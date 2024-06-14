@@ -54,7 +54,7 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
         super.viewWillAppear(animated)
         
     }
-
+    
     // MARK: - Set Up UI
     
     override func setupUI() {
@@ -107,18 +107,18 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
     
     func configureCollectionView() {
         guard let flowLayout = imageCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-
-//        let width = floor((UIScreen.main.bounds.width - 24 - 24 - (cellPadding * (cellsPerRow - 1))) / 4)
-//        let height = floor(width / imageRatio)
-//
+        
+        //        let width = floor((UIScreen.main.bounds.width - 24 - 24 - (cellPadding * (cellsPerRow - 1))) / 4)
+        //        let height = floor(width / imageRatio)
+        //
         flowLayout.minimumLineSpacing = 8
-//        flowLayout.minimumInteritemSpacing = 0
+        //        flowLayout.minimumInteritemSpacing = 0
         flowLayout.itemSize = CGSize(width: UI.contentsViewHeight, height: UI.contentsViewHeight * 1.2)
         flowLayout.sectionInset = UIEdgeInsets(top: 0.0, left: UI.imgViewVerticalMargin, bottom: 0.0, right: UI.imgViewVerticalMargin)
         flowLayout.scrollDirection = .horizontal
         flowLayout.invalidateLayout()
     }
-
+    
     // MARK: - Bind
     
     func bindViewModel() {
@@ -130,19 +130,46 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
             .bind(to: originalImgview.rx.image)
             .disposed(by: disposeBag)
         
-        output.thumbnailPhotoData
+        
+        output.thumbnailData
             .observe(on: MainScheduler.instance)
             .bind(to: imageCollectionView.rx.items) { cv, index, element in
                 let cell = cv.dequeueReusableCell(withCellType: ImageCardCell.self, forIndexPath: IndexPath(row: index, section: 0))
                 cell.bg.layer.cornerRadius = Appearance.Layer.defaultRadius
-                cell.thumbnailImage = element
+                cell.matchInfo = element
+                cell.thumbnailImage = UIImage(base64: cell.matchInfo.image, withPrefix: false)
                 return cell
             }
+            .disposed(by: disposeBag)
+        
+        imageCollectionView.rx.itemSelected
+            .flatMap { [weak self] indexPath -> Observable<ImageCardCell> in
+                guard let `self` = self else { return .empty() }
+                guard let cell = self.imageCollectionView.cellForItem(at: indexPath) as? ImageCardCell else { return .empty() }
+                return .just(cell)
+            }
+            .subscribe(onNext: { cell in
+                input.selectThumbnailSubject.onNext(cell.matchInfo)
+            })
             .disposed(by: disposeBag)
         
         output.closestMatchName
             .observe(on: MainScheduler.instance)
             .bind(to: nameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        input.selectThumbnailSubject
+            .observe(on: MainScheduler.instance)
+            .unwrap()
+            .map { $0.name }
+            .bind(to: nameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        input.selectThumbnailSubject
+            .observe(on: MainScheduler.instance)
+            .unwrap()
+            .map { UIImage(base64: $0.image, withPrefix: false) }
+            .bind(to: originalImgview.rx.image)
             .disposed(by: disposeBag)
         
         output.emotionName
@@ -156,6 +183,7 @@ class ResultViewController: BaseViewController, ViewModelBindableType {
             .disposed(by: disposeBag)
         
         navView.backButton.rx.action = input.backAction
+        
         
     }
 }

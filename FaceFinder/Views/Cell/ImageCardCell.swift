@@ -31,7 +31,7 @@ class ImageCardCell: ImagesCell {
     
     // MARK: - Properties
     
-    var matchInfo: Match?
+    var matchInfo: Match!
     var disposeBag = DisposeBag()
     
     // MARK: - Init
