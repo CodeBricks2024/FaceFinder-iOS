@@ -25,6 +25,8 @@ protocol CameraViewModelInput: BaseViewModelInput {
 protocol CameraViewModelOutput: BaseViewModelOutput {
     /// AVCapturePhotoOutput을 통해 변환된 이미지 전달
     var photoData: Observable<ComparedData?> { get }
+    /// API 리퀘스트에 대한 결과 받았을 때, 인디케이터 뷰 스탑해주기 위한 플래그
+    var requestDone: PublishSubject<Bool> { get }
 }
 
 protocol CameraViewModelType {
@@ -62,6 +64,7 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
             
             return self.service.sendImage(with: request)
                 .flatMap { result -> Observable<Void> in
+                    self.requestDone.onNext(true)
                     switch result {
                     case let .success(response):
                         print("res: \(response)")
@@ -82,6 +85,7 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
     // MARK: - Output -
  
     var photoData = Observable<ComparedData?>.just(nil)
+    var requestDone = PublishSubject<Bool>()
     
     // MARK: - Private -
     
@@ -92,6 +96,8 @@ class CameraViewModel: CameraViewModelInput, CameraViewModelOutput, CameraViewMo
     init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, service: MainServiceRepository = MainService()) {
         self.sceneCoordinator = sceneCoordinator
         self.service = service
+        
+        requestDone.onNext(false)
         
         photoData = photoInputSubject.asObservable().unwrap()
             .flatMap { photo -> Observable<ComparedData?> in

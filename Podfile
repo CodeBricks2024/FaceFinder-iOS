@@ -5,7 +5,7 @@ def libraries_ui
  # UI
     pod 'Toaster'
 		pod 'SnapKit'
-    pod 'SDWebImage', '~> 5.12.1'
+    pod 'NVActivityIndicatorView', '~> 5'
 end
 
 def libraries_network
