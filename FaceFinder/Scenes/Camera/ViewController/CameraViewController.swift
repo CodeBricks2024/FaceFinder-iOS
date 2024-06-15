@@ -85,7 +85,14 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkCameraPermission()
-        
+        cameraView.start { error in
+            debugPrint(error)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        cameraView.stop()
     }
     
     // MARK: - Set Up UI
@@ -114,7 +121,7 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         
         footerView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(cameraView)
-            make.bottom.equalTo(view.snp.bottomMargin)
+            make.bottom.equalTo(view.snp.bottom)
         }
     }
     
@@ -122,9 +129,14 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
     
     private func setActivityIndicator() {
         // 불투명 뷰 추가
-        view.addSubview(loadingBgView)
+        cameraView.addSubview(loadingBgView)
+        cameraView.bringSubviewToFront(loadingBgView)
         // activity indicator 추가
         loadingBgView.addSubview(activityIndicator)
+        
+        loadingBgView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
         
         activityIndicator.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)

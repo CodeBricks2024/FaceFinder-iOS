@@ -45,7 +45,7 @@ extension Appearance {
     
     enum Font {
         static let mediumLargeSize: CGFloat = 36.0
-        static let mediumSize: CGFloat = 24.0
+        static let mediumSize: CGFloat = 18.0
         static let regularSize: CGFloat = 16.0
         static let emojiLargeSize: CGFloat = 100.0
     }

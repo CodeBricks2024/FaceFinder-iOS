@@ -14,6 +14,7 @@ extension UILabel {
         label.font = .boldSystemFont(ofSize: Appearance.Font.mediumSize)
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.textColor = .black
         return label
     }
     
