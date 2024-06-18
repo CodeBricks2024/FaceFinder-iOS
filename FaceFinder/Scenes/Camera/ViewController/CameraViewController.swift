@@ -321,7 +321,10 @@ class CameraViewController: BaseViewController, ViewModelBindableType {
         output.photoData
             .observe(on: MainScheduler.instance)
             .do { [unowned self] _ in
-                self.setActivityIndicator()
+                DispatchQueue.main.async {
+                    self.cameraView.stop()
+                    self.setActivityIndicator()
+                }
             }
             .unwrap()
             .bind(to: input.moveAction.inputs)
